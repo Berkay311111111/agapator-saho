@@ -18,19 +18,19 @@ body, html {
 
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
 
-/* Sabit başlık */
+/* Sabit başlık - arka plan yok */
 #mainHeader {
   font-size:48px;
   font-weight:bold;
   color:#00eaff;
   text-align:center;
   margin-bottom:30px;
-  text-shadow:0 0 8px rgba(0,234,255,0.5);
+  text-shadow:0 0 12px rgba(0,234,255,0.8); /* glow efekti */
   position:sticky;
   top:0;
-  background:rgba(0,0,0,0.5);
   padding:10px 0;
   z-index:10;
+  background:none; /* arka plan yok */
 }
 
 /* Tab ve içerik */
@@ -46,7 +46,7 @@ body, html {
   color:#00eaff; 
   text-align:center; 
   margin-bottom:30px; 
-  text-shadow: 0 0 8px rgba(0,234,255,0.5);
+  text-shadow: 0 0 12px rgba(0,234,255,0.8); /* glow efekt */
 }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
 #loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; }
@@ -75,7 +75,7 @@ body, html {
 
 <!-- Login ekranı -->
 <div id="loginTab" class="tab active">
-  <div id="loginTitle">AGAPATOR SAHO</div>
+  <div id="loginTitle">SAHO AGAPATOR</div>
   <form id="loginForm">
     <input type="text" id="username" placeholder="Kullanıcı Adı" required>
     <input type="password" id="password" placeholder="Şifre" required>
