@@ -10,14 +10,31 @@ body, html {
   overflow:hidden;
 }
 
+/* Site başlığı */
+#siteTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+}
+
 /* Gradient background ve glow efektleri */
-.container { display:flex; height:100%; background: linear-gradient(120deg, #0f0c29, #302b63, #24243e); }
-#sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; }
+.container { display:flex; height:100%; background: linear-gradient(120deg, #0f0c29, #302b63, #24243e); padding-top:100px; }
+#sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; position:fixed; top:100px; bottom:0; }
 #sidebar button { margin:10px 0; padding:12px; background:rgba(20,20,20,0.7); border:none; color:#00eaff; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #00eaff; }
 #sidebar button:hover { background:#00eaff; color:#000; box-shadow:0 0 15px #00eaff; }
 
-#main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
+#main { flex:1; margin-left:240px; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
 
+/* Tablar */
 .tab { display:none; animation:fadein 0.5s; }
 .tab.active { display:block; }
 @keyframes fadein { from {opacity:0;} to {opacity:1;} }
@@ -46,6 +63,9 @@ body, html {
 
 <!-- Particle canvas -->
 <div id="particles-js"></div>
+
+<!-- Site başlığı -->
+<div id="siteTitle">AGAPATOR SAHO</div>
 
 <!-- Login -->
 <div id="loginTab" class="tab active">
@@ -79,17 +99,16 @@ body, html {
       <div class="item"><span>Chain Together 🧩</span><a href="BURAYA_CHAIN_LINK" target="_blank">İndir</a></div>
       <div class="item"><span>Pushing It Together 🤝</span><a href="BURAYA_PUSHING_LINK" target="_blank">İndir</a></div>
       <div class="item"><span>Ranch Simulator 🐄</span><a href="BURAYA_RANCH_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_PLACEHOLDER_LINK" target="_blank">İndir</a></div>
+      <div class="item"><span>Soon..</span><a href="BURAYA_PLACEHOLDER_LINK" target="_blank">İndir</a></div>
     </div>
 
     <!-- Fix Error -->
     <div class="tab" id="fix">
       <h2 style="color:#00eaff;">Fix Error</h2>
-      <div class="item"><span>Visual Runtimes C++</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
+      <div class="item"><span>Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Hyper-V OFF</span><a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- Tweak -->
@@ -107,24 +126,24 @@ body, html {
     <!-- Emulator -->
     <div class="tab" id="emulator">
       <h2 style="color:#00eaff;">Emülatörler</h2>
-      <div class="item"><span>MSI App Player 6315</span><a href="BURAYA_EMU_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Blue Stacks 5.22</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Blue Stacks 5.12</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
+      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- Free Fire -->
     <div class="tab" id="freefire">
       <h2 style="color:#00eaff;">Free Fire</h2>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
+      <div class="item"><span>Free Fire x86 (Amazon)</span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Free Fire Max x86 Native</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
     </div>
 
     <!-- Tools -->
     <div class="tab" id="tools">
       <h2 style="color:#00eaff;">Tools</h2>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Placeholder</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
+      <div class="item"><span>Chams Menu 64 Bit</span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Extreme Injector v3</span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER</span><a href="BURAYA_LINK" target="_blank">İndir</a></div>
     </div>
 
   </div>
