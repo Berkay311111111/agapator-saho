@@ -18,6 +18,22 @@ body, html {
 
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
 
+/* Sabit başlık */
+#mainHeader {
+  font-size:48px;
+  font-weight:bold;
+  color:#00eaff;
+  text-align:center;
+  margin-bottom:30px;
+  text-shadow:0 0 8px rgba(0,234,255,0.5);
+  position:sticky;
+  top:0;
+  background:rgba(0,0,0,0.5);
+  padding:10px 0;
+  z-index:10;
+}
+
+/* Tab ve içerik */
 .tab { display:none; animation:fadein 0.5s; }
 .tab.active { display:block; }
 @keyframes fadein { from {opacity:0;} to {opacity:1;} }
@@ -30,7 +46,7 @@ body, html {
   color:#00eaff; 
   text-align:center; 
   margin-bottom:30px; 
-  text-shadow: 0 0 8px rgba(0,234,255,0.5); /* Glow daha soft */
+  text-shadow: 0 0 8px rgba(0,234,255,0.5);
 }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
 #loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; }
@@ -83,12 +99,15 @@ body, html {
 
   <!-- Sağ içerik -->
   <div id="main">
+    <!-- Sabit başlık -->
+    <div id="mainHeader">SAHO AGAPATOR</div>
+
     <!-- Oyun İndirme -->
     <div class="tab" id="games">
       <h2 style="color:#00eaff;">Oyun İndirme Linkleri</h2>
-      <div class="item"><span>The Forest 🎮</span><a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank">İndir</a></div>
-      <div class="item"><span>Chained Together 🧩</span><a href="BURAYA_CHAIN_LINK" target="_blank">İndir</a></div>
-      <div class="item"><span>Pushing It Together 🤝</span><a href="https://drive.google.com/file/d/115xZxf0jEj8tr9JOjh0Po1k0M7w1VsDh/view?usp=drive_link" target="_blank">İndir</a></div>
+      <div class="item"><span>The Forest 🌳 🪓</span><a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank">İndir</a></div>
+      <div class="item"><span>Chained Together ⛓️</span><a href="https://drive.google.com/file/d/115xZxf0jEj8tr9JOjh0Po1k0M7w1VsDh/view?usp=drive_link" target="_blank">İndir</a></div>
+      <div class="item"><span>Pushing It Together 🤝</span><a href="https://drive.google.com/file/d/1O90hjDI5uVu4JMaQ8PT7dOyulTftKd9T/view?usp=sharing" target="_blank">İndir</a></div>
       <div class="item"><span>Ranch Simulator 🐄</span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank">İndir</a></div>
       <div class="item"><span>Soon..</span><a href="BURAYA_PLACEHOLDER_LINK" target="_blank">İndir</a></div>
     </div>
