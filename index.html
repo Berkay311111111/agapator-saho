@@ -5,16 +5,20 @@
 <title>AGAPATOR SAHO</title>
 <style>
 body, html {
-  margin:0; padding:0; height:100%;
+  margin:0;
+  padding:0;
+  height:100%;
   font-family:'Segoe UI', sans-serif;
   background:#0d0d0d;
   color:#fff;
   overflow:hidden;
 }
+
+/* Container ve sidebar */
 .container {
   display:flex;
   height:100%;
-  background: linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f);
+  background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
 }
 #sidebar {
   width:220px;
@@ -29,7 +33,7 @@ body, html {
 #sidebar button {
   margin:10px 0;
   padding:12px;
-  background:rgba(20,0,0,0.7);
+  background:rgba(0,0,0,0.7);
   border:none;
   color:#ff4d4d;
   cursor:pointer;
@@ -44,6 +48,8 @@ body, html {
   color:#000;
   box-shadow:0 0 15px #ff4d4d;
 }
+
+/* Main */
 #main {
   flex:1;
   padding:20px;
@@ -64,17 +70,8 @@ body, html {
   padding:10px 0;
   z-index:10;
 }
-.tab {
-  display:none;
-  opacity:0;
-  transform:translateY(20px);
-  transition:0.4s ease;
-}
-.tab.active {
-  display:block;
-  opacity:1;
-  transform:translateY(0);
-}
+
+/* Login */
 #loginTab {
   display:flex;
   flex-direction:column;
@@ -86,9 +83,9 @@ body, html {
 #loginTitle {
   font-size:48px;
   font-weight:bold;
-  color: rgb(0,180,0); /* soft yeşil başlangıç */
+  color:#00b300; /* Başlangıç yeşil */
   margin-bottom:30px;
-  text-shadow:0 0 8px rgba(0,180,0,0.7);
+  text-shadow:0 0 12px rgba(0,179,0,0.6);
 }
 #loginForm {
   display:flex;
@@ -110,10 +107,12 @@ body, html {
   border:none;
   border-radius:6px;
   background:#ff4d4d;
-  color:#000;
+  color:#fff;
   font-weight:bold;
   cursor:pointer;
 }
+
+/* Item listeler */
 .item {
   display:flex;
   justify-content:space-between;
@@ -132,32 +131,34 @@ body, html {
   text-decoration:none;
   font-weight:bold;
 }
-#colorSwitch {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  padding:10px 16px;
-  background:#ff4d4d;
-  color:#000;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  z-index:50;
+
+/* Tab */
+.tab {
+  display:none;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.4s ease;
+}
+.tab.active {
+  display:block;
+  opacity:1;
+  transform:translateY(0);
 }
 </style>
 </head>
 <body>
 
+<!-- Login -->
 <div id="loginTab" class="tab active">
   <div id="loginTitle">SAHO AGAPATOR</div>
   <form id="loginForm">
     <input type="text" id="keyInput" placeholder="Giriş Key" required>
-    <button type="submit">Giriş</button>
+    <button type="submit" id="loginButton">Giriş</button>
     <p id="errorMsg" style="color:red;"></p>
   </form>
 </div>
 
+<!-- Main Container -->
 <div class="container" id="mainContainer" style="display:none;">
   <div id="sidebar">
     <button data-tab="games">Oyun İndirme</button>
@@ -186,6 +187,7 @@ body, html {
       <div class="item"><span>DEVOUR ☠️<br>Min Sistem: i5 / 8GB RAM / GTX 750 | Multiplayer: Hayır | Tür: Korku</span><a href="https://www.mediafire.com/file/w1vvqjzj6wgiz4c/DEVOUR_v4.3.9-Oyunindirvip.zip/file" target="_blank">İndir</a></div>
       <div class="item"><span>Soon..</span><a href="#" target="_blank">İndir</a></div>
     </div>
+
     <!-- FIX -->
     <div class="tab" id="fix">
       <h2 class="redText">Fix Error</h2>
@@ -230,74 +232,115 @@ body, html {
       <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER <br><small>External/Internal destek</small></span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
       <div class="item"><span>Winrar x64</span><a href="https://www.mediafire.com/file/6z050qr2p4ryxfu/winrar-x64-713.exe/file" target="_blank">İndir</a></div>
     </div>
-
   </div>
 </div>
 
-<button id="colorSwitch">Renk Değiştir</button>
+<!-- Sağa alt renk değiştir butonu -->
+<button id="colorSwitch" style="position:fixed; bottom:20px; right:20px; padding:10px 20px; z-index:20; background:#ff4d4d; color:#fff; border:none; border-radius:6px; cursor:pointer;">Renk Değiştir</button>
 
 <script>
-// Login İşlemi
+// ------------------- LOGIN -------------------
 const loginForm=document.getElementById('loginForm');
 const loginTab=document.getElementById('loginTab');
 const mainContainer=document.getElementById('mainContainer');
 const errorMsg=document.getElementById('errorMsg');
 const keyInput=document.getElementById('keyInput');
 
-function __Ω(){ const x=[83,65],y=[72,79],z=[49,50,51]; return [...x,...y,...z].map(n=>String.fromCharCode(n)).join(''); }
+function __Ω(){
+  const x=[83,65],y=[72,79],z=[49,50,51];
+  return [...x,...y,...z].map(n=>String.fromCharCode(n)).join('');
+}
 
-loginForm.addEventListener('submit', e => {
+loginForm.addEventListener('submit', e=>{
   e.preventDefault();
-  if(keyInput.value === __Ω()){
+  if(keyInput.value===__Ω()){
     loginTab.style.display='none';
     mainContainer.style.display='flex';
     activateTab('games');
-  } else { errorMsg.textContent='Yanlış Key!'; }
+  }else errorMsg.textContent='Yanlış Key!';
 });
 
-// Tab Sistemi
+// ------------------- TAB -------------------
 const tabs=document.querySelectorAll('.tab');
 function activateTab(id){
   tabs.forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-document.querySelectorAll('#sidebar button[data-tab]').forEach(b=>{
-  b.onclick=()=>activateTab(b.dataset.tab);
-});
+document.querySelectorAll('#sidebar button[data-tab]').forEach(b=>b.onclick=()=>activateTab(b.dataset.tab));
 
-// Renk Değiştir Butonu
-const colorSwitch=document.getElementById('colorSwitch');
+// ------------------- Renk değiştir -------------------
 let isRed=true;
-colorSwitch.addEventListener('click', ()=>{
-  const redColor='#ff4d4d';
-  const greenColor='#00b300'; // soft yeşil
-  const allRedElements=document.querySelectorAll('.redText, #mainHeader, #sidebar button, .item a, #loginTitle, #loginForm button');
+const colorSwitch=document.getElementById('colorSwitch');
 
-  allRedElements.forEach(el=>{
-    if(isRed){
-      el.style.color=(el.tagName==='BUTTON' || el.tagName==='A')?greenColor:greenColor;
-      el.style.boxShadow=el.style.boxShadow.replace(/#ff4d4d/g,greenColor);
-      if(el.tagName==='H2' || el.id==='loginTitle' || el.id==='mainHeader'){
-        el.style.textShadow=el.style.textShadow.replace(/#ff4d4d|#ff4d4d/g,greenColor);
-      }
-      if(el.tagName==='BUTTON' || el.tagName==='A' || el.classList.contains('item')){
-        el.style.background=el.style.background.replace(/#ff4d4d/g,greenColor);
-      }
-    } else {
-      el.style.color=redColor;
-      el.style.boxShadow=el.style.boxShadow.replace(/#00b300/g,redColor);
-      if(el.tagName==='H2' || el.id==='loginTitle' || el.id==='mainHeader'){
-        el.style.textShadow=el.style.textShadow.replace(/#00b300/g,redColor);
-      }
-      if(el.tagName==='BUTTON' || el.tagName==='A' || el.classList.contains('item')){
-        el.style.background=el.style.background.replace(/#00b300/g,redColor);
-      }
-    }
+function toggleColors(){
+  const redColor="#ff4d4d";
+  const greenColor="#00b300";
+  const allTextElements=document.querySelectorAll(
+    "#sidebar button, #mainHeader, #loginTitle, .item a, #loginForm button, h2.redText"
+  );
+  allTextElements.forEach(el=>{
+    if(el.id==='loginButton'){ 
+      el.style.backgroundColor = isRed?greenColor:redColor; 
+      el.style.color="#fff"; 
+    }else el.style.color=isRed?greenColor:redColor;
+    if(el.style.boxShadow) el.style.boxShadow=el.style.boxShadow.replace(isRed?redColor:greenColor,isRed?greenColor:redColor);
+    if(el.style.textShadow) el.style.textShadow=el.style.textShadow.replace(isRed?redColor:greenColor,isRed?greenColor:redColor);
   });
   isRed=!isRed;
-});
-</script>
+}
 
-<script src="customParticles.js"></script>
+// ------------------- PARTICLES -------------------
+(function(){
+  const CONFIG={
+    PARTICLE_COUNT:160,
+    PARTICLE_COLOR:"255,77,77",
+    MAX_DISTANCE:150,
+    MOUSE_RADIUS:180,
+    SPEED:1.4,
+    BACKGROUND_CLEAR:true
+  };
+  let canvas,ctx,width,height;
+  const mouse={x:null,y:null};
+  let particles=[];
+
+  function createCanvas(){
+    canvas=document.createElement("canvas");
+    canvas.id="particleCanvas";
+    canvas.style.position="fixed";
+    canvas.style.top=0;
+    canvas.style.left=0;
+    canvas.style.width="100%";
+    canvas.style.height="100%";
+    canvas.style.zIndex=0;
+    canvas.style.pointerEvents="none";
+    document.body.prepend(canvas);
+    ctx=canvas.getContext("2d");
+    resizeCanvas();
+  }
+  function resizeCanvas(){width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;}
+  function initMouse(){window.addEventListener("mousemove",e=>{mouse.x=e.clientX;mouse.y=e.clientY});window.addEventListener("mouseleave",()=>{mouse.x=null;mouse.y=null});}
+  class Particle{
+    constructor(){this.reset();}
+    reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.r=Math.random()*2+1;this.vx=(Math.random()-0.5)*CONFIG.SPEED;this.vy=(Math.random()-0.5)*CONFIG.SPEED;this.color=CONFIG.PARTICLE_COLOR;}
+    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<=0||this.x>=width)this.vx*=-1;if(this.y<=0||this.y>=height)this.vy*=-1;}
+    draw(){ctx.fillStyle=`rgb(${this.color})`;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();}
+  }
+  function createParticles(){particles=[];for(let i=0;i<CONFIG.PARTICLE_COUNT;i++)particles.push(new Particle());}
+  function connectParticles(){for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<CONFIG.MAX_DISTANCE){ctx.strokeStyle=`rgba(${particles[i].color},${1-dist/CONFIG.MAX_DISTANCE})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}}}
+  function connectMouse(){if(mouse.x===null)return;particles.forEach(p=>{const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<CONFIG.MOUSE_RADIUS){ctx.strokeStyle=`rgba(${p.color},${1-dist/CONFIG.MOUSE_RADIUS})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(mouse.x,mouse.y);ctx.lineTo(p.x,p.y);ctx.stroke();}});}
+  function clear(){ctx.clearRect(0,0,width,height);}
+  function update(){particles.forEach(p=>{p.update();p.draw();});}
+  function animate(){if(CONFIG.BACKGROUND_CLEAR)clear();update();connectParticles();connectMouse();requestAnimationFrame(animate);}
+  function initParticles(){createCanvas();createParticles();initMouse();window.addEventListener("resize",resizeCanvas);animate();}
+  initParticles();
+
+  // Particle renk değişimi ile sayfa renklerini bağla
+  colorSwitch.addEventListener('click',()=>{
+    toggleColors();
+    CONFIG.PARTICLE_COLOR=CONFIG.PARTICLE_COLOR==="255,77,77"?"0,179,0":"255,77,77";
+    particles.forEach(p=>p.color=CONFIG.PARTICLE_COLOR);
+  });
+})();
+</script>
 </body>
 </html>
