@@ -10,98 +10,95 @@ body {
   font-family:'Segoe UI', sans-serif;
   background:#0d0d0d;
   color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
-#header {
-  background:#ff4d4d;
-  color:#000;
-  padding:15px;
+
+#converterContainer {
+  background:#1a1a1a;
+  padding:30px 40px;
+  border-radius:12px;
   text-align:center;
-  font-size:32px;
-  font-weight:bold;
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
 }
-#backBtn {
-  margin:20px;
-  padding:10px 20px;
-  background:#222;
+
+h1 {
   color:#ff4d4d;
-  border:none;
+  margin-bottom:25px;
+}
+
+input, select, button {
+  padding:10px 15px;
+  margin:10px 0;
   border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-}
-#content {
-  padding:20px;
-}
-input, button {
-  padding:10px;
+  border:none;
   font-size:16px;
-  margin:5px 0;
-  border-radius:6px;
-  border:none;
 }
+
+input, select {
+  width:200px;
+}
+
 button {
   background:#ff4d4d;
   color:#000;
   cursor:pointer;
   font-weight:bold;
+  width:220px;
 }
+
 #result {
-  margin-top:15px;
+  margin-top:20px;
   font-size:18px;
   font-weight:bold;
+  color:#00ff99;
 }
 </style>
 </head>
 <body>
 
-<div id="header">Code Converter</div>
-
-<button id="backBtn" onclick="goBack()">← Geri</button>
-
-<div id="content">
-  <p>Hex ↔ Decimal Converter</p>
+<div id="converterContainer">
+  <h1>Code Converter</h1>
   
-  <label for="hexInput">Hex:</label><br>
-  <input type="text" id="hexInput" placeholder="Örn: FF"><br>
-  <button onclick="hexToDecimal()">Hex → Decimal</button><br><br>
-  
-  <label for="decInput">Decimal:</label><br>
-  <input type="number" id="decInput" placeholder="Örn: 255"><br>
-  <button onclick="decimalToHex()">Decimal → Hex</button>
+  <input type="text" id="inputValue" placeholder="Sayı girin">
+  <br>
+  <select id="conversionType">
+    <option value="hexToDec">Hex → Decimal</option>
+    <option value="decToHex">Decimal → Hex</option>
+  </select>
+  <br>
+  <button onclick="convert()">Dönüştür</button>
   
   <div id="result"></div>
 </div>
 
 <script>
-function goBack(){
-  window.location.href = 'index.html';
-}
+function convert(){
+  const value = document.getElementById('inputValue').value.trim();
+  const type = document.getElementById('conversionType').value;
+  const resultDiv = document.getElementById('result');
 
-function hexToDecimal(){
-  const hex = document.getElementById('hexInput').value.trim();
-  if(hex === ''){
-    document.getElementById('result').textContent = 'Lütfen bir Hex değeri girin.';
+  if(value === ''){
+    resultDiv.textContent = 'Lütfen bir değer girin!';
     return;
   }
-  const decimal = parseInt(hex, 16);
-  if(isNaN(decimal)){
-    document.getElementById('result').textContent = 'Geçersiz Hex değeri!';
-  } else {
-    document.getElementById('result').textContent = `Decimal: ${decimal}`;
-  }
-}
 
-function decimalToHex(){
-  const dec = document.getElementById('decInput').value.trim();
-  if(dec === ''){
-    document.getElementById('result').textContent = 'Lütfen bir Decimal değeri girin.';
-    return;
-  }
-  const num = parseInt(dec, 10);
-  if(isNaN(num)){
-    document.getElementById('result').textContent = 'Geçersiz Decimal değeri!';
-  } else {
-    document.getElementById('result').textContent = `Hex: ${num.toString(16).toUpperCase()}`;
+  if(type === 'hexToDec'){
+    const decimal = parseInt(value, 16);
+    if(isNaN(decimal)){
+      resultDiv.textContent = 'Geçersiz Hex değeri!';
+    } else {
+      resultDiv.textContent = `Decimal: ${decimal}`;
+    }
+  } else if(type === 'decToHex'){
+    const num = parseInt(value, 10);
+    if(isNaN(num)){
+      resultDiv.textContent = 'Geçersiz Decimal değeri!';
+    } else {
+      resultDiv.textContent = `Hex: ${num.toString(16).toUpperCase()}`;
+    }
   }
 }
 </script>
