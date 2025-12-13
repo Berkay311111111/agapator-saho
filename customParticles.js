@@ -52,10 +52,7 @@
 
   /* ================= PARTICLE ================= */
   class Particle {
-    constructor() {
-      this.reset();
-    }
-
+    constructor() { this.reset(); }
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
@@ -64,15 +61,12 @@
       this.vy = (Math.random() - 0.5) * CONFIG.SPEED;
       this.color = CONFIG.PARTICLE_COLOR;
     }
-
     update() {
       this.x += this.vx;
       this.y += this.vy;
-
       if (this.x <= 0 || this.x >= width) this.vx *= -1;
       if (this.y <= 0 || this.y >= height) this.vy *= -1;
     }
-
     draw() {
       ctx.fillStyle = `rgb(${this.color})`;
       ctx.beginPath();
@@ -83,7 +77,6 @@
 
   /* ================= SYSTEM ================= */
   let particles = [];
-
   function createParticles() {
     particles = [];
     for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
@@ -98,7 +91,6 @@
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < CONFIG.MAX_DISTANCE) {
           ctx.strokeStyle = `rgba(${particles[i].color},${1 - dist / CONFIG.MAX_DISTANCE})`;
           ctx.lineWidth = 1;
@@ -113,12 +105,10 @@
 
   function connectMouse() {
     if (mouse.x === null) return;
-
     particles.forEach(p => {
       const dx = mouse.x - p.x;
       const dy = mouse.y - p.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-
       if (dist < CONFIG.MOUSE_RADIUS) {
         ctx.strokeStyle = `rgba(${p.color},${1 - dist / CONFIG.MOUSE_RADIUS})`;
         ctx.lineWidth = 1.5;
@@ -131,24 +121,15 @@
   }
 
   /* ================= LOOP ================= */
-  function clear() {
-    ctx.clearRect(0, 0, width, height);
-  }
+  function clear() { ctx.clearRect(0, 0, width, height); }
 
-  function update() {
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-  }
+  function update() { particles.forEach(p => { p.update(); p.draw(); }); }
 
   function animate() {
     if (CONFIG.BACKGROUND_CLEAR) clear();
-
     update();
     connectParticles();
     connectMouse();
-
     requestAnimationFrame(animate);
   }
 
@@ -168,36 +149,30 @@
     document.body.appendChild(btn);
 
     btn.addEventListener("click", () => {
-      // Partikül rengi
       CONFIG.PARTICLE_COLOR = CONFIG.PARTICLE_COLOR === "0,255,0" ? "255,77,77" : "0,255,0";
       particles.forEach(p => p.color = CONFIG.PARTICLE_COLOR);
 
       const isGreen = CONFIG.PARTICLE_COLOR === "0,255,0";
 
-      // Temel renkler
-      const mainColor = isGreen ? "#00ff00" : "#ff4d4d";
-      const bgGradient = isGreen
-        ? "linear-gradient(120deg, #0a2c0a, #1a5c1a, #0f3e0f)"
-        : "linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f)";
-      const buttonBg = isGreen ? "rgba(0,255,0,0.7)" : "rgba(20,0,0,0.7)";
-      const boxShadow = isGreen ? "0 0 8px #00ff00" : "0 0 8px #ff4d4d";
-      const buttonColor = isGreen ? "#000" : "#ff4d4d";
+      // Var olan elementlerin renklerini sadece mevcut tonları kırmızı/yeşile çevir
+      const elements = document.querySelectorAll("#sidebar button, #langSwitch, #mainHeader, #loginTitle, .item, .item a, #loginForm button");
+      elements.forEach(el => {
+        const currentBg = window.getComputedStyle(el).backgroundColor;
+        const currentColor = window.getComputedStyle(el).color;
 
-      // Sidebar, header, langSwitch, loginTitle
-      const sidebarButtons = document.querySelectorAll("#sidebar button, #langSwitch, #mainHeader, #loginTitle");
-      sidebarButtons.forEach(el => {
-        el.style.background = buttonBg;
-        el.style.color = buttonColor;
-        el.style.boxShadow = boxShadow;
+        // Sadece kırmızı tonları yeşile, yeşil tonları kırmızıya çevir
+        if (isGreen) {
+          if (currentBg.includes("rgb(255,") || currentBg.includes("rgb(204,") || currentColor.includes("rgb(255,")) {
+            el.style.backgroundColor = "#00ff00";
+            el.style.color = "#000";
+          }
+        } else {
+          if (currentBg.includes("rgb(0,255,0)") || currentColor.includes("rgb(0,255,0)")) {
+            el.style.backgroundColor = "#ff4d4d";
+            el.style.color = "#000";
+          }
+        }
       });
-
-      // Container arka plan
-      const container = document.querySelector(".container");
-      if (container) container.style.background = bgGradient;
-
-      // Login tab arka plan
-      const loginTab = document.getElementById("loginTab");
-      if (loginTab) loginTab.style.background = bgGradient;
     });
   }
 
