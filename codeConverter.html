@@ -2,205 +2,184 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Code Converter</title>
+<title>Code Tool Panel</title>
 <style>
+* { box-sizing: border-box; }
+
 html, body {
   margin:0;
   padding:0;
+  width:100%;
+  height:100%;
   font-family:'Segoe UI', sans-serif;
   background:#0d0d0d;
   color:#fff;
-  height:100%;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
-#converterContainer {
-  background:#1a1a1a;
-  padding:40px;
-  border-radius:12px;
-  box-shadow: 0 0 40px rgba(255, 77, 77, 0.6);
-  width:95%;
-  max-width:1200px;
-  height:90%;
+#app {
   display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
+  width:100%;
+  height:100%;
+}
+
+/* SOL PANEL */
+#leftPanel {
+  width:50%;
+  padding:40px;
+  background:#111;
+  border-right:2px solid #222;
+  overflow-y:auto;
+}
+
+/* SAĞ PANEL */
+#rightPanel {
+  width:50%;
+  padding:40px;
+  background:#0f0f0f;
   overflow-y:auto;
 }
 
 h1 {
   color:#ff4d4d;
-  font-size:40px;
-  margin-bottom:30px;
+  margin-bottom:25px;
 }
 
-input, select, button {
-  padding:15px 20px;
+input, select, textarea, button {
+  width:100%;
+  padding:14px;
   margin:10px 0;
+  font-size:18px;
   border-radius:8px;
   border:none;
-  font-size:20px;
-}
-
-input, select {
-  width:90%;
-  max-width:600px;
 }
 
 button {
   background:#ff4d4d;
   color:#000;
-  cursor:pointer;
   font-weight:bold;
-  width:250px;
-  margin-top:10px;
+  cursor:pointer;
 }
 
-#result {
-  margin-top:25px;
-  font-size:22px;
+.secondary {
+  background:#00ff99;
+}
+
+textarea {
+  min-height:120px;
+  resize:vertical;
+}
+
+.section {
+  margin-bottom:40px;
+  padding-bottom:20px;
+  border-bottom:1px solid #222;
+}
+
+.status {
+  margin-top:10px;
   font-weight:bold;
   color:#00ff99;
-  word-wrap: break-word;
-  width:90%;
-  max-width:800px;
-  min-height:60px;
-  text-align:center;
-}
-
-#copyBtn {
-  margin-top:15px;
-  background:#00ff99;
-  color:#000;
-}
-
-#backBtn {
-  margin-bottom:20px;
-  background:#222;
-  color:#ff4d4d;
-  width:180px;
-  font-size:18px;
 }
 </style>
 </head>
 <body>
 
-<div id="converterContainer">
-  <button id="backBtn" onclick="goBack()">← Geri</button>
+<div id="app">
+
+<!-- SOL: CONVERTER -->
+<div id="leftPanel">
   <h1>Code Converter</h1>
-  
-  <input type="text" id="inputValue" placeholder="Sayıları veya harfleri girin (örn: FF 255 AA)">
-  <br>
-  <select id="conversionType">
-    <option value="hexToDec">Hex → Decimal</option>
-    <option value="decToHex">Decimal → Hex</option>
-    <option value="cppToCsharp">C++ → C#</option>
-    <option value="csharpToCpp">C# → C++</option>
-    <option value="binToDec">Binary → Decimal</option>
-    <option value="decToBin">Decimal → Binary</option>
-    <option value="decToOct">Decimal → Octal</option>
-    <option value="octToDec">Octal → Decimal</option>
-    <!-- Daha fazla dönüştürme buraya eklenebilir -->
-  </select>
-  <br>
-  <button onclick="convert()">Dönüştür</button>
-  <button id="copyBtn" onclick="copyResult()">Sonucu Kopyala</button>
-  
-  <div id="result"></div>
+
+  <div class="section">
+    <input id="inputValue" placeholder="FF FF 255 101010" />
+    
+    <select id="conversionType">
+      <option value="hexToDec">Hex → Decimal</option>
+      <option value="decToHex">Decimal → Hex</option>
+      <option value="binToDec">Binary → Decimal</option>
+      <option value="decToBin">Decimal → Binary</option>
+      <option value="cppToCsharp">C++ → C#</option>
+      <option value="csharpToCpp">C# → C++</option>
+    </select>
+
+    <button onclick="convert()">Dönüştür</button>
+    <button class="secondary" onclick="copyResult()">Sonucu Kopyala</button>
+
+    <textarea id="result" placeholder="Sonuç burada..."></textarea>
+  </div>
+</div>
+
+<!-- SAĞ: SCANNER PANEL (UI ONLY) -->
+<div id="rightPanel">
+  <h1>HD‑Player Scanner</h1>
+
+  <div class="section">
+    <input placeholder="Process Name (HD-Player)" disabled value="HD-Player"/>
+    <textarea placeholder="Pattern (FF FF ?? 00 00)"></textarea>
+
+    <button onclick="fakeScan()">Scan</button>
+    <button onclick="fakeApply()">Apply Change</button>
+
+    <div class="status" id="scanStatus">Status: Idle</div>
+  </div>
+
+  <div class="section">
+    <h2>Log</h2>
+    <textarea id="logArea" placeholder="Scan logs..." readonly></textarea>
+  </div>
+</div>
+
 </div>
 
 <script>
-function goBack(){
-  window.location.href = 'index.html';
-}
-
 function convert(){
-  const input = document.getElementById('inputValue').value.trim();
-  const type = document.getElementById('conversionType').value;
-  const resultDiv = document.getElementById('result');
-
-  if(input === ''){
-    resultDiv.textContent = 'Lütfen bir değer girin!';
-    return;
-  }
-
+  const input = document.getElementById("inputValue").value.trim();
+  const type = document.getElementById("conversionType").value;
   const values = input.split(/[\s,]+/);
-  let results = [];
+  let out = [];
 
-  switch(type){
-    case 'hexToDec':
-      values.forEach(v => {
-        const decimal = parseInt(v,16);
-        results.push(isNaN(decimal) ? `${v} → Geçersiz Hex` : decimal);
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
+  values.forEach(v=>{
+    switch(type){
+      case 'hexToDec':
+        out.push(parseInt(v,16));
+        break;
+      case 'decToHex':
+        out.push(parseInt(v,10).toString(16).toUpperCase());
+        break;
+      case 'binToDec':
+        out.push(parseInt(v,2));
+        break;
+      case 'decToBin':
+        out.push(parseInt(v,10).toString(2));
+        break;
+      case 'cppToCsharp':
+        out.push(v.toUpperCase());
+        break;
+      case 'csharpToCpp':
+        out.push(v.toUpperCase());
+        break;
+    }
+  });
 
-    case 'decToHex':
-      values.forEach(v => {
-        const num = parseInt(v,10);
-        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(16).toUpperCase());
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
-
-    case 'cppToCsharp':
-      values.forEach(v => results.push(v.toUpperCase()));
-      resultDiv.textContent = results.join(' ');
-      break;
-
-    case 'csharpToCpp':
-      values.forEach(v => results.push(v.toUpperCase()));
-      resultDiv.textContent = results.join(', ');
-      break;
-
-    case 'binToDec':
-      values.forEach(v => {
-        const decimal = parseInt(v,2);
-        results.push(isNaN(decimal) ? `${v} → Geçersiz Binary` : decimal);
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
-
-    case 'decToBin':
-      values.forEach(v => {
-        const num = parseInt(v,10);
-        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(2));
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
-
-    case 'decToOct':
-      values.forEach(v => {
-        const num = parseInt(v,10);
-        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(8));
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
-
-    case 'octToDec':
-      values.forEach(v => {
-        const decimal = parseInt(v,8);
-        results.push(isNaN(decimal) ? `${v} → Geçersiz Octal` : decimal);
-      });
-      resultDiv.textContent = results.join(' ');
-      break;
-  }
+  document.getElementById("result").value =
+    type === 'csharpToCpp' ? out.join(', ') : out.join(' ');
 }
 
 function copyResult(){
-  const resultDiv = document.getElementById('result');
-  if(resultDiv.textContent.trim() === ''){
-    alert('Kopyalanacak bir sonuç yok!');
-    return;
-  }
-  navigator.clipboard.writeText(resultDiv.textContent)
-    .then(() => alert('Sonuç kopyalandı!'))
-    .catch(() => alert('Kopyalama başarısız!'));
+  navigator.clipboard.writeText(
+    document.getElementById("result").value
+  );
+}
+
+/* SAĞ PANEL – PLACEHOLDER */
+function fakeScan(){
+  document.getElementById("scanStatus").innerText = "Status: Scanning...";
+  document.getElementById("logArea").value += "[+] Scan started...\n";
+}
+
+function fakeApply(){
+  document.getElementById("scanStatus").innerText = "Status: Applied";
+  document.getElementById("logArea").value += "[+] Changes applied.\n";
 }
 </script>
 
