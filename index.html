@@ -262,16 +262,24 @@ const loginTab=document.getElementById('loginTab');
 const mainContainer=document.getElementById('mainContainer');
 const errorMsg=document.getElementById('errorMsg');
 const keyInput=document.getElementById('keyInput');
-const correctKey='SAHO123';
+function __Ω(){
+  const x=[83,65],y=[72,79],z=[49,50,51];
+  return [...x,...y,...z].map(n=>String.fromCharCode(n)).join('');
+}
 
-loginForm.addEventListener('submit',e=>{
+
+loginForm.addEventListener('submit', e => {
   e.preventDefault();
-  if(keyInput.value===correctKey){
-    loginTab.style.display='none';
-    mainContainer.style.display='flex';
+
+  if (keyInput.value === __Ω()) {
+    loginTab.style.display = 'none';
+    mainContainer.style.display = 'flex';
     activateTab('games');
-  }else errorMsg.textContent='Yanlış Key!';
+  } else {
+    errorMsg.textContent = 'Yanlış Key!';
+  }
 });
+
 
 const tabs=document.querySelectorAll('.tab');
 function activateTab(id){
