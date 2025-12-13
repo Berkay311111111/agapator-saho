@@ -23,7 +23,7 @@ html, body {
   text-align:center;
   box-shadow: 0 0 30px rgba(255, 77, 77, 0.6);
   width: 90%;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 h1 {
@@ -67,18 +67,28 @@ button {
   background:#00ff99;
   color:#000;
 }
+
+#backBtn {
+  margin-bottom:20px;
+  background:#222;
+  color:#ff4d4d;
+  width:150px;
+}
 </style>
 </head>
 <body>
 
 <div id="converterContainer">
+  <button id="backBtn" onclick="goBack()">← Geri</button>
   <h1>Code Converter</h1>
   
-  <input type="text" id="inputValue" placeholder="Sayıları girin (örn: FF FF FF veya 255 128)">
+  <input type="text" id="inputValue" placeholder="Sayıları veya harfleri girin">
   <br>
   <select id="conversionType">
     <option value="hexToDec">Hex → Decimal</option>
     <option value="decToHex">Decimal → Hex</option>
+    <option value="cppToCsharp">C++ → C#</option>
+    <option value="csharpToCpp">C# → C++</option>
   </select>
   <br>
   <button onclick="convert()">Dönüştür</button>
@@ -88,6 +98,10 @@ button {
 </div>
 
 <script>
+function goBack(){
+  window.location.href = 'index.html';
+}
+
 function convert(){
   const input = document.getElementById('inputValue').value.trim();
   const type = document.getElementById('conversionType').value;
@@ -105,27 +119,33 @@ function convert(){
   if(type === 'hexToDec'){
     values.forEach(v => {
       const decimal = parseInt(v, 16);
-      if(isNaN(decimal)){
-        results.push(`${v} → Geçersiz Hex`);
-      } else {
-        results.push(decimal);
-      }
+      results.push(isNaN(decimal) ? `${v} → Geçersiz Hex` : decimal);
     });
-  } else if(type === 'decToHex'){
+    resultDiv.textContent = results.join(' ');
+  } 
+  else if(type === 'decToHex'){
     values.forEach(v => {
       const num = parseInt(v, 10);
-      if(isNaN(num)){
-        results.push(`${v} → Geçersiz Decimal`);
-      } else {
-        results.push(num.toString(16).toUpperCase());
-      }
+      results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(16).toUpperCase());
     });
+    resultDiv.textContent = results.join(' ');
+  } 
+  else if(type === 'cppToCsharp'){
+    // C++ girişi (FF, FF) → C# boşlukla
+    values.forEach(v => {
+      results.push(v.toUpperCase());
+    });
+    resultDiv.textContent = results.join(' ');
+  } 
+  else if(type === 'csharpToCpp'){
+    // C# girişi (FF FF) → C++ virgül ile
+    values.forEach(v => {
+      results.push(v.toUpperCase());
+    });
+    resultDiv.textContent = results.join(', ');
   }
-
-  resultDiv.textContent = results.join(' ');
 }
 
-// Kopyalama fonksiyonu
 function copyResult(){
   const resultDiv = document.getElementById('result');
   if(resultDiv.textContent.trim() === ''){
