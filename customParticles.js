@@ -17,15 +17,16 @@
   function createCanvas() {
     canvas = document.createElement("canvas");
     canvas.id = "particleCanvas";
-    canvas.style.position = "fixed";
-    canvas.style.top = "0";
-    canvas.style.left = "0";
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.zIndex = "0";
-    canvas.style.pointerEvents = "none";
+    Object.assign(canvas.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      zIndex: "0",
+      pointerEvents: "none"
+    });
     document.body.prepend(canvas);
-
     ctx = canvas.getContext("2d");
     resizeCanvas();
   }
@@ -84,10 +85,7 @@
   let particles = [];
 
   function createParticles() {
-    particles = [];
-    for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
-      particles.push(new Particle());
-    }
+    particles = Array.from({ length: CONFIG.PARTICLE_COUNT }, () => new Particle());
   }
 
   /* ================= CONNECTIONS ================= */
@@ -96,7 +94,7 @@
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const dist = Math.hypot(dx, dy);
 
         if (dist < CONFIG.MAX_DISTANCE) {
           ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR},${1 - dist / CONFIG.MAX_DISTANCE})`;
@@ -116,7 +114,7 @@
     particles.forEach(p => {
       const dx = mouse.x - p.x;
       const dy = mouse.y - p.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      const dist = Math.hypot(dx, dy);
 
       if (dist < CONFIG.MOUSE_RADIUS) {
         ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR},${1 - dist / CONFIG.MOUSE_RADIUS})`;
@@ -143,11 +141,9 @@
 
   function animate() {
     if (CONFIG.BACKGROUND_CLEAR) clear();
-
     update();
     connectParticles();
     connectMouse();
-
     requestAnimationFrame(animate);
   }
 
