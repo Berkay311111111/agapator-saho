@@ -1,293 +1,52 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<title>AGAPATOR SAHO</title>
-<style>
-body, html {
-    margin:0;
-    padding:0;
-    height:100%;
-    font-family:'Segoe UI', sans-serif;
-    background:#0d0d0d;
-    overflow:hidden;
-    color:#00cc00; /* Başlangıç yeşili */
-}
-.container {
-    display:flex;
-    height:100%;
-    background: linear-gradient(120deg, #102010, #204020, #103010);
-}
-#sidebar {
-    width:220px;
-    background:rgba(0,0,0,0.8);
-    padding:20px;
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    z-index:2;
-    position:relative;
-}
-#sidebar button {
-    margin:10px 0;
-    padding:12px;
-    background:#006600;
-    border:none;
-    color:#fff;
-    cursor:pointer;
-    border-radius:8px;
-    transition:0.3s;
-    text-align:left;
-    font-weight:bold;
-    box-shadow:0 0 5px #00cc00;
-}
-#sidebar button:hover {
-    background:#00cc00;
-    color:#000;
-    box-shadow:0 0 15px #00cc00;
-}
-#main {
-    flex:1;
-    padding:20px;
-    box-sizing:border-box;
-    overflow-y:auto;
-    position:relative;
-    z-index:2;
-}
-#mainHeader {
-    font-size:48px;
-    font-weight:bold;
-    color:#00cc00;
-    text-align:center;
-    margin-bottom:30px;
-    text-shadow:0 0 12px rgba(0,204,0,0.8);
-    position:sticky;
-    top:0;
-    padding:10px 0;
-    z-index:10;
-}
-#langSwitch {
-    position:absolute;
-    top:10px;
-    right:10px;
-    padding:6px 12px;
-    background:#00cc00;
-    color:#000;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
-    z-index:20;
-}
-.tab {
-    display:none;
-    opacity:0;
-    transform:translateY(20px);
-    transition:0.4s ease;
-}
-.tab.active {
-    display:block;
-    opacity:1;
-    transform:translateY(0);
-}
-#loginTab {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:100%;
-    z-index:3;
-}
-#loginTitle {
-    font-size:48px;
-    font-weight:bold;
-    color:#00cc00;
-    margin-bottom:30px;
-    text-shadow:0 0 12px rgba(0,204,0,0.8);
-}
-#loginForm {
-    display:flex;
-    flex-direction:column;
-    max-width:350px;
-    width:100%;
-}
-#loginForm input {
-    margin:10px 0;
-    padding:12px;
-    border-radius:6px;
-    border:none;
-    font-size:16px;
-    color:#00cc00;
-    font-weight:bold;
-    background:#111;
-}
-#loginForm button {
-    padding:12px;
-    border:none;
-    border-radius:6px;
-    background:#006600;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
-}
-.item {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:12px 0;
-    padding:10px;
-    background:rgba(0,0,0,0.5);
-    border-radius:8px;
-    box-shadow:0 0 8px #00cc00;
-    border:1px solid #00cc00;
-}
-.item a {
-    padding:8px 15px;
-    border-radius:6px;
-    background:#222;
-    color:#00cc00;
-    text-decoration:none;
-    font-weight:bold;
-}
-#colorToggle {
-    position:fixed;
-    top:20px;
-    right:20px;
-    z-index:30;
-    padding:10px 20px;
-    background:#111;
-    color:#fff;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 0 10px #00cc00;
-    transition:0.3s;
-}
-#colorToggle:hover {
-    background:#00cc00;
-    color:#000;
-    box-shadow:0 0 20px #00cc00;
-}
-</style>
-</head>
-<body>
+"use strict";
 
-<div id="loginTab" class="tab active">
-    <div id="loginTitle">SAHO AGAPATOR</div>
-    <form id="loginForm">
-        <input type="text" id="keyInput" placeholder="Giriş Key" required>
-        <button type="submit">Giriş</button>
-        <p id="errorMsg" style="color:red;"></p>
-    </form>
-</div>
+const CONFIG = {
+  PARTICLE_COUNT: 160,
+  PARTICLE_COLOR: "0,204,0",
+  MAX_DISTANCE: 150,
+  MOUSE_RADIUS: 180,
+  SPEED: 1.4,
+  BACKGROUND_CLEAR: true
+};
 
-<div class="container" id="mainContainer" style="display:none;">
-    <div id="sidebar">
-        <button data-tab="games">Oyun İndirme</button>
-        <button data-tab="fix">Fix Error</button>
-        <button data-tab="tweak">Tweaks</button>
-        <button data-tab="emulator">Emulator</button>
-        <button data-tab="freefire">Free Fire</button>
-        <button data-tab="tools">Tools</button>
-        <button onclick="window.location.href='codeConverter.html'">Code Converter</button>
-    </div>
+let canvas, ctx, width, height, particles=[], mouse={x:null,y:null};
 
-    <div id="main">
-        <div id="mainHeader">SAHO AGAPATOR</div>
+function createCanvas(){
+    canvas=document.createElement("canvas");
+    canvas.id="particleCanvas";
+    canvas.style.position="fixed";
+    canvas.style.top=0;
+    canvas.style.left=0;
+    canvas.style.width="100%";
+    canvas.style.height="100%";
+    canvas.style.zIndex="0";
+    canvas.style.pointerEvents="none";
+    document.body.prepend(canvas);
+    ctx=canvas.getContext("2d");
+    resizeCanvas();
+}
+function resizeCanvas(){width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;}
+window.addEventListener("resize",resizeCanvas);
 
-        <!-- OYUNLAR -->
-        <div class="tab" id="games">
-            <h2>Oyun İndirme Linkleri</h2>
-            <div class="item"><span>The Forest 🌳 🪓<br>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Macera</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Chained Together ⛓️<br>Min Sistem: i3 / 4GB RAM / HD 4000 | Multiplayer: Evet | Tür: Eğlence</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Pushing It Together 🤝<br>Min Sistem: i3 / 4GB RAM | Multiplayer: Evet | Tür: Eğlence</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Ranch Simulator 🐄<br>Min Sistem: i5 / 8GB RAM / GTX 650 | Multiplayer: Hayır | Tür: Simülasyon</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Far Cry 3 🌴🔥<br>Min Sistem: i5 / 4GB RAM / GTX 460 | Multiplayer: Hayır | Tür: Aksiyon</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>PC Building Simulator 🖥️<br>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Hayır | Tür: Simülasyon</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>PC Building Simulator 2 🖥️<br>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Hayır | Tür: Simülasyon</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>State of Decay 2 Juggernaut Edition 🧟<br>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Aksiyon</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>DEVOUR ☠️<br>Min Sistem: i5 / 8GB RAM / GTX 750 | Multiplayer: Hayır | Tür: Korku</span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Soon..</span><a href="#" target="_blank">İndir</a></div>
-        </div>
+window.addEventListener("mousemove",e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+window.addEventListener("mouseleave",()=>{mouse.x=null;mouse.y=null;});
 
-        <!-- Free Fire -->
-        <div class="tab" id="freefire">
-            <h2>Free Fire</h2>
-            <div class="item"><span>Free Fire x86 (Amazon) <br><small>Min Sistem: 2GB RAM / Android 5.0 | FPS: Orta | External/Internal Uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
-            <div class="item"><span>Free Fire Max x86 Native <br><small>Min Sistem: 3GB RAM / Android 6.0 | FPS: Yüksek | External/Internal Uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
-        </div>
-    </div>
-</div>
-
-<button id="colorToggle">Renk Değiştir</button>
-
-<script>
-const loginForm=document.getElementById('loginForm');
-const loginTab=document.getElementById('loginTab');
-const mainContainer=document.getElementById('mainContainer');
-const errorMsg=document.getElementById('errorMsg');
-const keyInput=document.getElementById('keyInput');
-
-function __Ω(){
-  const x=[83,65],y=[72,79],z=[49,50,51];
-  return [...x,...y,...z].map(n=>String.fromCharCode(n)).join('');
+class Particle{
+    constructor(){this.reset();}
+    reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.r=Math.random()*2+1;this.vx=(Math.random()-0.5)*CONFIG.SPEED;this.vy=(Math.random()-0.5)*CONFIG.SPEED;this.color=CONFIG.PARTICLE_COLOR;}
+    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<=0||this.x>=width)this.vx*=-1;if(this.y<=0||this.y>=height)this.vy*=-1;}
+    draw(){ctx.fillStyle=`rgb(${this.color})`;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();}
 }
 
-loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if(keyInput.value===__Ω()){
-        loginTab.style.display='none';
-        mainContainer.style.display='flex';
-        activateTab('games');
-    } else {
-        errorMsg.textContent='Yanlış Key!';
-    }
-});
+function createParticles(){particles=[];for(let i=0;i<CONFIG.PARTICLE_COUNT;i++){particles.push(new Particle());}}
+function connectParticles(){for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<CONFIG.MAX_DISTANCE){ctx.strokeStyle=`rgba(${particles[i].color},${1-dist/CONFIG.MAX_DISTANCE})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}}}
+function connectMouse(){if(mouse.x===null)return;particles.forEach(p=>{const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<CONFIG.MOUSE_RADIUS){ctx.strokeStyle=`rgba(${p.color},${1-dist/CONFIG.MOUSE_RADIUS})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(mouse.x,mouse.y);ctx.lineTo(p.x,p.y);ctx.stroke();}});}
+function clear(){ctx.clearRect(0,0,width,height);}
+function update(){particles.forEach(p=>{p.update();p.draw();});}
+function animate(){if(CONFIG.BACKGROUND_CLEAR)clear();update();connectParticles();connectMouse();requestAnimationFrame(animate);}
+function updateParticlesColor(color){CONFIG.PARTICLE_COLOR=color;particles.forEach(p=>p.color=color);}
+window.updateParticlesColor=updateParticlesColor;
 
-const tabs=document.querySelectorAll('.tab');
-function activateTab(id){
-    tabs.forEach(t=>t.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-document.querySelectorAll('#sidebar button[data-tab]')
-.forEach(b=>b.onclick=()=>activateTab(b.dataset.tab));
-
-// Toggle Button
-const colorToggle=document.getElementById('colorToggle');
-let isGreen=true;
-colorToggle.addEventListener('click',()=>{
-    isGreen=!isGreen;
-    const colorMain=isGreen?"#00cc00":"#ff4d4d";
-    const shadowMain=isGreen?"0 0 8px #00cc00":"0 0 8px #ff4d4d";
-    const boxBorder=isGreen?"1px solid #00cc00":"1px solid #ff4d4d";
-    const buttonBg=isGreen?"#006600":"#ff4d4d";
-    const particleColor=isGreen?"0,204,0":"255,77,77";
-
-    // Particles
-    if(window.updateParticlesColor) window.updateParticlesColor(particleColor);
-
-    // Metin ve gölgeler
-    const elements=document.querySelectorAll(
-        "#sidebar button,#langSwitch,#mainHeader,#loginTitle,#loginForm button,.item,.item a"
-    );
-    elements.forEach(el=>{
-        if(el.classList.contains("item")){
-            el.style.boxShadow=shadowMain;
-            el.style.border=boxBorder;
-        } else if(el.tagName==="BUTTON" || el.id==="colorToggle"){
-            el.style.background=buttonBg;
-            if(el.id!=="colorToggle") el.style.color="#fff";
-            else el.style.color="#fff";
-            el.style.boxShadow=shadowMain;
-        } else {
-            el.style.color=colorMain;
-            el.style.textShadow=isGreen?"0 0 12px rgba(0,204,0,0.8)":"0 0 12px rgba(255,77,77,0.8)";
-        }
-    });
-});
-</script>
-
-<script src="customParticles.js"></script>
-</body>
-</html>
+createCanvas();
+createParticles();
+animate();
