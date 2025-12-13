@@ -8,14 +8,48 @@ body, html {
   margin:0; padding:0; height:100%; font-family: 'Segoe UI', sans-serif; background:#0d0d0d; color:#fff;
   overflow:hidden;
 }
+
+/* Container ve sol sidebar */
 .container { display:flex; height:100%; background: linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f); }
 #sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; z-index:2; position:relative; }
 #sidebar button { margin:10px 0; padding:12px; background:rgba(20,0,0,0.7); border:none; color:#ff4d4d; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #ff4d4d; }
 #sidebar button:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
+
+/* Ana içerik */
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; z-index:2; }
-#mainHeader { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow:0 0 12px rgba(255,77,77,0.8); position:sticky; top:0; padding:10px 0; z-index:10; background:none; }
+#mainHeader {
+  font-size:48px;
+  font-weight:bold;
+  color:#ff4d4d;
+  text-align:center;
+  margin-bottom:30px;
+  text-shadow:0 0 12px rgba(255,77,77,0.8);
+  position:sticky;
+  top:0;
+  padding:10px 0;
+  z-index:10;
+  background:none;
+}
+
+/* Dil butonu */
+#langSwitch {
+  position:absolute;
+  top:10px; right:10px;
+  padding:6px 12px;
+  background:#ff4d4d;
+  color:#000;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:20;
+}
+
+/* Sekmeler ve animasyon */
 .tab { display:none; opacity:0; transform:translateY(20px); transition:0.4s ease; }
 .tab.active { display:block; opacity:1; transform:translateY(0); }
+
+/* Login ekranı */
 #loginTab { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; z-index:3; position:relative; }
 #loginTitle { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow: 0 0 12px rgba(255,77,77,0.8); }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
@@ -23,106 +57,143 @@ body, html {
 #loginForm button { padding:12px; border:none; border-radius:6px; background:#ff4d4d; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
 #loginForm button:hover { background:#ff8080; }
 #loginForm label { display:none; }
+
 .item { display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:10px; background:rgba(0,0,0,0.5); border-radius:8px; box-shadow:0 0 8px #ff4d4d; transition:0.3s; }
 .item:hover { background:rgba(0,0,0,0.7); box-shadow:0 0 15px #ff4d4d; }
 .item a { padding:8px 15px; border-radius:6px; background:#222; color:#ff4d4d; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 5px #ff4d4d; }
 .item a:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
+
 #main::-webkit-scrollbar { width:8px; }
 #main::-webkit-scrollbar-thumb { background:#ff4d4d; border-radius:4px; }
-#particleCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; display:block; }
 
-/* Dil butonu */
-#langSwitch {
+#particleCanvas {
   position:fixed;
-  top:15px;
-  right:15px;
-  background:rgba(255,77,77,0.8);
-  color:#000;
-  border:none;
-  padding:10px 15px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-  z-index:20;
-  transition:0.3s;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  display:block;
 }
-#langSwitch:hover { background:#ff1a1a; color:#fff; }
 </style>
 </head>
 <body>
 
 <canvas id="particleCanvas"></canvas>
 
-<button id="langSwitch">EN</button>
+<!-- Dil Butonu -->
+<button id="langSwitch">EN / TR</button>
 
 <div id="loginTab" class="tab active">
-  <div id="loginTitle" data-tr="SAHO AGAPATOR" data-en="SAHO AGAPATOR">SAHO AGAPATOR</div>
+  <div id="loginTitle">SAHO AGAPATOR</div>
   <form id="loginForm">
-    <input type="text" id="keyInput" placeholder="Giriş Key" data-tr-placeholder="Giriş Key" data-en-placeholder="Login Key" required>
-    <button type="submit" data-tr="Giriş" data-en="Login">Giriş</button>
+    <input type="text" id="keyInput" placeholder="Giriş Key" required>
+    <button type="submit">Giriş</button>
     <p id="errorMsg" style="color:red;"></p>
   </form>
 </div>
 
 <div class="container" style="display:none;" id="mainContainer">
   <div id="sidebar">
-    <button data-tab="games" data-tr="Oyun İndirme" data-en="Game Downloads">Oyun İndirme</button>
-    <button data-tab="fix" data-tr="Fix Error" data-en="Fix Error">Fix Error</button>
-    <button data-tab="tweak" data-tr="Tweak" data-en="Tweak">Tweak</button>
-    <button data-tab="emulator" data-tr="Emulator" data-en="Emulator">Emulator</button>
-    <button data-tab="freefire" data-tr="Free Fire" data-en="Free Fire">Free Fire</button>
-    <button data-tab="tools" data-tr="Tools" data-en="Tools">Tools</button>
+    <button data-tab="games">Oyun İndirme</button>
+    <button data-tab="fix">Fix Error</button>
+    <button data-tab="tweak">Tweak</button>
+    <button data-tab="emulator">Emulator</button>
+    <button data-tab="freefire">Free Fire</button>
+    <button data-tab="tools">Tools</button>
   </div>
   <div id="main">
-    <div id="mainHeader" data-tr="SAHO AGAPATOR" data-en="SAHO AGAPATOR">SAHO AGAPATOR</div>
+    <div id="mainHeader">SAHO AGAPATOR</div>
 
-    <!-- Örnek Tab -->
+    <!-- Oyun İndirme -->
     <div class="tab" id="games">
-      <h2 style="color:#ff4d4d" data-tr="Oyun İndirme Linkleri" data-en="Game Download Links">Oyun İndirme Linkleri</h2>
-
-      <div class="item">
-        <span data-tr="Kategori: Korku / Hayatta Kalma + Multiplayer" data-en="Category: Horror / Survival + Multiplayer">Kategori: Korku / Hayatta Kalma + Multiplayer</span>
-        <a href="#" target="_blank" data-tr="İndir" data-en="Download">İndir</a>
-      </div>
-      <!-- Diğer itemlar buraya benzer şekilde eklenebilir -->
+      <h2 style="color:#ff4d4d;">Oyun İndirme Linkleri</h2>
+      <div class="item"><span>The Forest 🌳 🪓 <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Hayır | Tür: Korku-Macera</small></span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>Chained Together ⛓️ <br><small>Min Sistem: i3 / 4GB RAM / HD 4000 | Multiplayer: Evet | Tür: Eğlence</small></span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>DEVOUR ☠️ <br><small>Min Sistem: i5 / 8GB RAM / GTX 750 | Multiplayer: Hayır | Tür: Korku</small></span><a href="#" target="_blank">İndir</a></div>
     </div>
+
+    <!-- Fix Error -->
+    <div class="tab" id="fix">
+      <h2 style="color:#ff4d4d;">Fix Error</h2>
+      <div class="item"><span>Visual Runtimes C++</span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>Windows 10 Defender</span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>DirectX</span><a href="#" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Tweak -->
+    <div class="tab" id="tweak">
+      <h2 style="color:#ff4d4d;">4v4 için Ideal Ayarlar</h2>
+      <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
+      <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
+      <p>🔹 18514 – Bence 4v4 için En İyi Uyum!</p>
+    </div>
+
+    <!-- Emulator -->
+    <div class="tab" id="emulator">
+      <h2 style="color:#ff4d4d;">Emülatörler</h2>
+      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 5.12</span><a href="#" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Free Fire -->
+    <div class="tab" id="freefire">
+      <h2 style="color:#ff4d4d;">Free Fire</h2>
+      <div class="item"><span>Free Fire x86 (Amazon) <br><small>Min Sistem: 2GB RAM / Android 5.0 | FPS: Orta | External/Internal Uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>Free Fire Max x86 Native <br><small>Min Sistem: 3GB RAM / Android 6.0 | FPS: Yüksek | External/Internal Uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Tools -->
+    <div class="tab" id="tools">
+      <h2 style="color:#ff4d4d;">Tools</h2>
+      <div class="item"><span>Chams Menu 64 Bit <br><small>External ve Internal panellerle uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>Extreme Injector v3 <br><small>External ve Internal panellerle uyumlu</small></span><a href="#" target="_blank">İndir</a></div>
+      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER <br><small>External/Internal destek</small></span><a href="#" target="_blank">İndir</a></div>
+    </div>
+
   </div>
 </div>
 
 <script>
-// Particle sistemi
+// --- PARTICLE SİSTEMİ ---
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
-function resizeCanvas(){canvas.width = window.innerWidth; canvas.height = window.innerHeight;}
-window.addEventListener('resize', resizeCanvas); resizeCanvas();
-class Particle {constructor(){this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*3+1; this.speedX=(Math.random()-0.5)*2; this.speedY=(Math.random()-0.5)*2;} update(){this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>canvas.width)this.speedX*=-1; if(this.y<0||this.y>canvas.height)this.speedY*=-1;} draw(){ctx.fillStyle='#ff4d4d'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}}
-const particlesArray=[]; for(let i=0;i<120;i++) particlesArray.push(new Particle());
-function connect(){for(let a=0;a<particlesArray.length;a++){for(let b=a;b<particlesArray.length;b++){const dx=particlesArray[a].x-particlesArray[b].x; const dy=particlesArray[a].y-particlesArray[b].y; const distance=Math.sqrt(dx*dx+dy*dy); if(distance<150){ctx.strokeStyle='rgba(255,77,77,'+(1-distance/150)+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x,particlesArray[a].y); ctx.lineTo(particlesArray[b].x,particlesArray[b].y); ctx.stroke();}}}}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particlesArray.forEach(p=>{p.update(); p.draw();}); connect(); requestAnimationFrame(animate);}
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=(Math.random()-0.5)*2;this.speedY=(Math.random()-0.5)*2;}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x<0||this.x>canvas.width)this.speedX*=-1;if(this.y<0||this.y>canvas.height)this.speedY*=-1;}draw(){ctx.fillStyle='#ff4d4d';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}}
+const particlesArray=[];for(let i=0;i<120;i++)particlesArray.push(new Particle());
+function connect(){for(let a=0;a<particlesArray.length;a++){for(let b=a;b<particlesArray.length;b++){const dx=particlesArray[a].x-particlesArray[b].x;const dy=particlesArray[a].y-particlesArray[b].y;const distance=Math.sqrt(dx*dx+dy*dy);if(distance<150){ctx.strokeStyle='rgba(255,77,77,'+(1-distance/150)+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(particlesArray[a].x,particlesArray[a].y);ctx.lineTo(particlesArray[b].x,particlesArray[b].y);ctx.stroke();}}}}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});connect();requestAnimationFrame(animate);}
 animate();
 
-// Tab geçişleri
+// --- TAB GEÇİŞLERİ ---
 const tabButtons=document.querySelectorAll('#sidebar button');
 const tabs=document.querySelectorAll('.tab');
-tabButtons.forEach(btn=>{btn.addEventListener('click',()=>{tabs.forEach(t=>t.classList.remove('active'));document.getElementById(btn.dataset.tab).classList.add('active');});});
+tabButtons.forEach(btn=>{btn.addEventListener('click',()=>{const target=btn.getAttribute('data-tab');tabs.forEach(t=>t.classList.remove('active'));document.getElementById(target).classList.add('active');});});
 
-// Basit key kontrolü
+// --- LOGIN SİSTEMİ ---
+const validKeys=['npc117','reco117','umeyir117','savas117','saho117'];
 const loginForm=document.getElementById('loginForm');
-const loginTab=document.getElementById('loginTab');
-const mainContainer=document.getElementById('mainContainer');
-const errorMsg=document.getElementById('errorMsg');
-loginForm.addEventListener('submit',e=>{e.preventDefault(); const key=document.getElementById('keyInput').value; if(key==='SAHO123'){loginTab.style.display='none'; mainContainer.style.display='flex';} else{errorMsg.textContent='Wrong Key!';}});
+const keyInput=document.getElementById('keyInput');
+loginForm.addEventListener('submit',e=>{e.preventDefault();const key=keyInput.value.trim().toLowerCase();if(validKeys.find(k=>k.toLowerCase()===key)){document.getElementById('loginTab').style.display='none';document.getElementById('mainContainer').style.display='flex';tabs[0].classList.add('active');}else{document.getElementById('errorMsg').innerText='Key hatalı';}});
 
-// Dil değiştirici
+// --- DİL DEĞİŞTİRME ---
 let currentLang='tr';
-const langSwitch=document.getElementById('langSwitch');
-langSwitch.addEventListener('click',()=>{
-  currentLang = currentLang==='tr' ? 'en' : 'tr';
-  langSwitch.textContent = currentLang==='tr' ? 'EN' : 'TR';
-  document.querySelectorAll('[data-tr]').forEach(el=>{
-    if(el.tagName==='INPUT') el.placeholder = el.dataset[currentLang];
-    else el.textContent = el.dataset[currentLang];
-  });
+const langBtn=document.getElementById('langSwitch');
+langBtn.addEventListener('click',()=>{
+  currentLang=currentLang==='tr'?'en':'tr';
+  if(currentLang==='tr'){
+    document.getElementById('loginTitle').innerText='SAHO AGAPATOR';
+    keyInput.placeholder='Giriş Key';
+    loginForm.querySelector('button').innerText='Giriş';
+    langBtn.innerText='EN / TR';
+  }else{
+    document.getElementById('loginTitle').innerText='SAHO AGAPATOR';
+    keyInput.placeholder='Enter Key';
+    loginForm.querySelector('button').innerText='Login';
+    langBtn.innerText='TR / EN';
+  }
 });
 </script>
 
