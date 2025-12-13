@@ -32,6 +32,24 @@ body {
 #content {
   padding:20px;
 }
+input, button {
+  padding:10px;
+  font-size:16px;
+  margin:5px 0;
+  border-radius:6px;
+  border:none;
+}
+button {
+  background:#ff4d4d;
+  color:#000;
+  cursor:pointer;
+  font-weight:bold;
+}
+#result {
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -41,13 +59,50 @@ body {
 <button id="backBtn" onclick="goBack()">← Geri</button>
 
 <div id="content">
-  <p>Code Converter içeriği buraya gelecek...</p>
-  <!-- Buraya istediğin converter özelliklerini ekleyebilirsin -->
+  <p>Hex ↔ Decimal Converter</p>
+  
+  <label for="hexInput">Hex:</label><br>
+  <input type="text" id="hexInput" placeholder="Örn: FF"><br>
+  <button onclick="hexToDecimal()">Hex → Decimal</button><br><br>
+  
+  <label for="decInput">Decimal:</label><br>
+  <input type="number" id="decInput" placeholder="Örn: 255"><br>
+  <button onclick="decimalToHex()">Decimal → Hex</button>
+  
+  <div id="result"></div>
 </div>
 
 <script>
 function goBack(){
   window.location.href = 'index.html';
+}
+
+function hexToDecimal(){
+  const hex = document.getElementById('hexInput').value.trim();
+  if(hex === ''){
+    document.getElementById('result').textContent = 'Lütfen bir Hex değeri girin.';
+    return;
+  }
+  const decimal = parseInt(hex, 16);
+  if(isNaN(decimal)){
+    document.getElementById('result').textContent = 'Geçersiz Hex değeri!';
+  } else {
+    document.getElementById('result').textContent = `Decimal: ${decimal}`;
+  }
+}
+
+function decimalToHex(){
+  const dec = document.getElementById('decInput').value.trim();
+  if(dec === ''){
+    document.getElementById('result').textContent = 'Lütfen bir Decimal değeri girin.';
+    return;
+  }
+  const num = parseInt(dec, 10);
+  if(isNaN(num)){
+    document.getElementById('result').textContent = 'Geçersiz Decimal değeri!';
+  } else {
+    document.getElementById('result').textContent = `Hex: ${num.toString(16).toUpperCase()}`;
+  }
 }
 </script>
 
