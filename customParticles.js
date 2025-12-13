@@ -3,12 +3,15 @@
 
   /* ================= CONFIG ================= */
   const CONFIG = {
-    PARTICLE_COUNT: 160,
-    PARTICLE_COLOR: "255,77,77",
-    MAX_DISTANCE: 150,
-    MOUSE_RADIUS: 180,
-    SPEED: 1.4,
-    BACKGROUND_CLEAR: true
+    const CONFIG = {
+  PARTICLE_COUNT: 160,
+  PARTICLE_COLOR: "77,255,77", // yeşil renk
+  MAX_DISTANCE: 150,
+  MOUSE_RADIUS: 180,
+  SPEED: 1.4,
+  BACKGROUND_CLEAR: true
+};
+
   };
 
   /* ================= CANVAS ================= */
