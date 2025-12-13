@@ -10,27 +10,27 @@ body, html {
   overflow:hidden;
 }
 
-/* Gradient background ve glow efektleri */
-.container { display:flex; height:100%; background: linear-gradient(120deg, #0f0c29, #302b63, #24243e); }
+/* Gradient background ve glow efektleri kırmızı tema */
+.container { display:flex; height:100%; background: linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f); }
 #sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; }
-#sidebar button { margin:10px 0; padding:12px; background:rgba(20,20,20,0.7); border:none; color:#00eaff; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #00eaff; }
-#sidebar button:hover { background:#00eaff; color:#000; box-shadow:0 0 15px #00eaff; }
+#sidebar button { margin:10px 0; padding:12px; background:rgba(20,0,0,0.7); border:none; color:#ff4d4d; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #ff4d4d; }
+#sidebar button:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
 
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
 
-/* Sabit başlık - arka plan yok */
+/* Sabit başlık */
 #mainHeader {
   font-size:48px;
   font-weight:bold;
-  color:#00eaff;
+  color:#ff4d4d;
   text-align:center;
   margin-bottom:30px;
-  text-shadow:0 0 12px rgba(0,234,255,0.8); /* glow efekti */
+  text-shadow:0 0 12px rgba(255,77,77,0.8);
   position:sticky;
   top:0;
   padding:10px 0;
   z-index:10;
-  background:none; /* arka plan yok */
+  background:none;
 }
 
 /* Tab ve içerik */
@@ -42,27 +42,27 @@ body, html {
 #loginTitle {
   font-size:48px; 
   font-weight:bold; 
-  color:#00eaff; 
+  color:#ff4d4d; 
   text-align:center; 
   margin-bottom:30px; 
-  text-shadow: 0 0 12px rgba(0,234,255,0.8); /* glow efekt */
+  text-shadow: 0 0 12px rgba(255,77,77,0.8);
 }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
 #loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; }
 #loginForm input[type="password"] { color:red; font-weight:bold; }
-#loginForm button { padding:12px; border:none; border-radius:6px; background:#00eaff; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
-#loginForm button:hover { background:#0ff; }
-#loginForm label { color:#00eaff; font-weight:bold; margin-top:5px; }
+#loginForm button { padding:12px; border:none; border-radius:6px; background:#ff4d4d; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
+#loginForm button:hover { background:#ff8080; }
+#loginForm label { color:#ff4d4d; font-weight:bold; margin-top:5px; }
 
 /* İçerik satırları */
-.item { display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:10px; background:rgba(0,0,0,0.5); border-radius:8px; box-shadow:0 0 8px #00eaff; transition:0.3s; }
-.item:hover { background:rgba(0,0,0,0.7); box-shadow:0 0 15px #00eaff; }
-.item a { padding:8px 15px; border-radius:6px; background:#222; color:#00eaff; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 5px #00eaff; }
-.item a:hover { background:#00eaff; color:#000; box-shadow:0 0 15px #00eaff; }
+.item { display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:10px; background:rgba(0,0,0,0.5); border-radius:8px; box-shadow:0 0 8px #ff4d4d; transition:0.3s; }
+.item:hover { background:rgba(0,0,0,0.7); box-shadow:0 0 15px #ff4d4d; }
+.item a { padding:8px 15px; border-radius:6px; background:#222; color:#ff4d4d; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 5px #ff4d4d; }
+.item a:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
 
 /* Scroll bar */
 #main::-webkit-scrollbar { width:8px; }
-#main::-webkit-scrollbar-thumb { background:#00eaff; border-radius:4px; }
+#main::-webkit-scrollbar-thumb { background:#ff4d4d; border-radius:4px; }
 
 /* Particle canvas */
 #particles-js { position:fixed; width:100%; height:100%; top:0; left:0; z-index:-1; }
@@ -99,31 +99,30 @@ body, html {
 
   <!-- Sağ içerik -->
   <div id="main">
-    <!-- Sabit başlık -->
     <div id="mainHeader">SAHO AGAPATOR</div>
 
     <!-- Oyun İndirme -->
     <div class="tab" id="games">
-      <h2 style="color:#00eaff;">Oyun İndirme Linkleri</h2>
-      <div class="item"><span>The Forest 🌳 🪓</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Chained Together ⛓️</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Pushing It Together 🤝</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Ranch Simulator 🐄</span><a href="#" target="_blank">İndir</a></div>
+      <h2 style="color:#ff4d4d;">Oyun İndirme Linkleri</h2>
+      <div class="item"><span>The Forest 🌳 🪓</span><a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank">İndir</a></div>
+      <div class="item"><span>Chained Together ⛓️</span><a href="https://drive.google.com/file/d/1TzAow9eP_Fivq2j0jwZq7boFPYpeksgn/view?usp=drive_link" target="_blank">İndir</a></div>
+      <div class="item"><span>Pushing It Together 🤝</span><a href="https://drive.google.com/file/d/1O90hjDI5uVu4JMaQ8PT7dOyulTftKd9T/view?usp=sharing" target="_blank">İndir</a></div>
+      <div class="item"><span>Ranch Simulator 🐄</span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank">İndir</a></div>
       <div class="item"><span>Soon..</span><a href="#" target="_blank">İndir</a></div>
     </div>
 
     <!-- Fix Error -->
     <div class="tab" id="fix">
-      <h2 style="color:#00eaff;">Fix Error</h2>
-      <div class="item"><span>Visual Runtimes C++</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Windows 10 Defender</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>DirectX</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Hyper-V OFF</span><a href="#" target="_blank">İndir</a></div>
+      <h2 style="color:#ff4d4d;">Fix Error</h2>
+      <div class="item"><span>Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Hyper-V OFF</span><a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- Tweak -->
     <div class="tab" id="tweak">
-      <h2 style="color:#00eaff;">4v4 için Ideal Ayarlar</h2>
+      <h2 style="color:#ff4d4d;">4v4 için Ideal Ayarlar</h2>
       <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
       <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
       <p>🔹 18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
@@ -135,42 +134,41 @@ body, html {
 
     <!-- Emulator -->
     <div class="tab" id="emulator">
-      <h2 style="color:#00eaff;">Emülatörler</h2>
-      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 5.12</span><a href="#" target="_blank">İndir</a></div>
+      <h2 style="color:#ff4d4d;">Emülatörler</h2>
+      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- Free Fire -->
     <div class="tab" id="freefire">
-      <h2 style="color:#00eaff;">Free Fire</h2>
-      <div class="item"><span>Free Fire x86 (Amazon) </span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Free Fire Max x86 Native</span><a href="#" target="_blank">İndir</a></div>
+      <h2 style="color:#ff4d4d;">Free Fire</h2>
+      <div class="item"><span>Free Fire x86 (Amazon) </span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Free Fire Max x86 Native</span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- Tools -->
     <div class="tab" id="tools">
-      <h2 style="color:#00eaff;">Tools</h2>
-      <div class="item"><span>Chams Menu 64 Bit</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>Extreme Injector v3</span><a href="#" target="_blank">İndir</a></div>
-      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER</span><a href="#" target="_blank">İndir</a></div>
+      <h2 style="color:#ff4d4d;">Tools</h2>
+      <div class="item"><span>Chams Menu 64 Bit</span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Extreme Injector v3</span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER</span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
     </div>
 
   </div>
 </div>
 
-<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-// Particle.js
+// Particle.js kırmızı tema
 particlesJS("particles-js", {
   "particles": {
     "number": {"value":120},
-    "color":{"value":"#00eaff"},
+    "color":{"value":"#ff4d4d"},
     "shape":{"type":"circle"},
-    "opacity":{"value":0.6},
+    "opacity":{"value":0.7},
     "size":{"value":3},
-    "line_linked":{"enable":true,"distance":150,"color":"#00eaff","opacity":0.5,"width":1},
+    "line_linked":{"enable":true,"distance":150,"color":"#ff4d4d","opacity":0.5,"width":1},
     "move":{"enable":true,"speed":2}
   }
 });
@@ -186,14 +184,13 @@ tabButtons.forEach(btn => {
   });
 });
 
-// Login sistemi + Remember Me
-const users = { 'npc':'npc1','reco':'reco1','umeyir':'umeyir1','savas':'savas1','saho':'saho1' };
+// Login sistemi case-insensitive ve şifre = kullanıcıadı1
+const users = ['npc','reco','umeyir','savas','saho'];
 const loginForm = document.getElementById('loginForm');
 const rememberCheckbox = document.getElementById('rememberMe');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 
-// Sayfa yüklendiğinde önce kayıtlı kullanıcıyı al
 window.addEventListener('load', () => {
   const savedUser = localStorage.getItem('savedUser');
   const savedPass = localStorage.getItem('savedPass');
@@ -204,16 +201,17 @@ window.addEventListener('load', () => {
 
 loginForm.addEventListener('submit', e=>{
   e.preventDefault();
-  const user = usernameInput.value.toLowerCase();
-  const pass = passwordInput.value;
+  const user = usernameInput.value.trim().toLowerCase();
+  const pass = passwordInput.value.trim();
   login(user, pass);
 });
 
 function login(user, pass){
-  if(users[user] && users[user]===pass){
+  const valid = users.find(u=>u.toLowerCase()===user);
+  if(valid && pass===valid+'1'){
     document.getElementById('loginTab').style.display='none';
     document.getElementById('mainContainer').style.display='flex';
-    tabs[0].classList.add('active'); // ilk tab aktif
+    tabs[0].classList.add('active');
     if(rememberCheckbox.checked){
       localStorage.setItem('savedUser', user);
       localStorage.setItem('savedPass', pass);
