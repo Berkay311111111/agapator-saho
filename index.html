@@ -282,8 +282,17 @@ loginForm.addEventListener('submit', e => {
     mainContainer.style.display = 'flex';
     activateTab('games');
     startParticles();
-  } else { errorMsg.textContent = 'Yanlış Key!'; }
+
+    // 🎵 ŞARKI BURADA
+    const music = document.getElementById("loginMusic");
+    music.volume = 0.6;
+    music.play();
+
+  } else {
+    errorMsg.textContent = 'Yanlış Key!';
+  }
 });
+
 
 // TAB
 const tabs=document.querySelectorAll('.tab');
@@ -327,6 +336,9 @@ function startParticles(){
   animate();
 }
 </script>
+<audio id="loginMusic"
+       src="https://raw.githubusercontent.com/Berkay311111111/agapator-saho/main/22.mp3"
+       preload="auto"></audio>
 
 </body>
 </html>
