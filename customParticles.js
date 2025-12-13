@@ -149,27 +149,25 @@
     document.body.appendChild(btn);
 
     btn.addEventListener("click", () => {
+      // Partikül rengini değiştir
       CONFIG.PARTICLE_COLOR = CONFIG.PARTICLE_COLOR === "0,255,0" ? "255,77,77" : "0,255,0";
       particles.forEach(p => p.color = CONFIG.PARTICLE_COLOR);
 
       const isGreen = CONFIG.PARTICLE_COLOR === "0,255,0";
 
-      // Var olan elementlerin renklerini sadece mevcut tonları kırmızı/yeşile çevir
-      const elements = document.querySelectorAll("#sidebar button, #langSwitch, #mainHeader, #loginTitle, .item, .item a, #loginForm button");
-      elements.forEach(el => {
-        const currentBg = window.getComputedStyle(el).backgroundColor;
+      // Metin renklerini sadece kırmızı/yeşil tonlarıyla değiştir, arka planı asla değiştirme
+      const textElements = document.querySelectorAll(
+        "#sidebar button, #langSwitch, #mainHeader, #loginTitle, .item a, #loginForm button"
+      );
+      textElements.forEach(el => {
         const currentColor = window.getComputedStyle(el).color;
-
-        // Sadece kırmızı tonları yeşile, yeşil tonları kırmızıya çevir
         if (isGreen) {
-          if (currentBg.includes("rgb(255,") || currentBg.includes("rgb(204,") || currentColor.includes("rgb(255,")) {
-            el.style.backgroundColor = "#00ff00";
-            el.style.color = "#000";
+          if (currentColor.includes("255,77,77") || currentColor.includes("204,0,0")) {
+            el.style.color = "#00ff00";
           }
         } else {
-          if (currentBg.includes("rgb(0,255,0)") || currentColor.includes("rgb(0,255,0)")) {
-            el.style.backgroundColor = "#ff4d4d";
-            el.style.color = "#000";
+          if (currentColor.includes("0,255,0")) {
+            el.style.color = "#ff4d4d";
           }
         }
       });
