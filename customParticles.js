@@ -4,7 +4,7 @@
   /* ================= CONFIG ================= */
   const CONFIG = {
     PARTICLE_COUNT: 160,
-    PARTICLE_COLOR: "255,77,77", // başlangıç yeşil
+    PARTICLE_COLOR: "255,77,77", // başlangıç kırmızı
     MAX_DISTANCE: 150,
     MOUSE_RADIUS: 180,
     SPEED: 1.4,
@@ -62,7 +62,7 @@
       this.r = Math.random() * 2 + 1;
       this.vx = (Math.random() - 0.5) * CONFIG.SPEED;
       this.vy = (Math.random() - 0.5) * CONFIG.SPEED;
-      this.color = CONFIG.PARTICLE_COLOR; // başlangıç rengi
+      this.color = CONFIG.PARTICLE_COLOR;
     }
 
     update() {
@@ -168,8 +168,22 @@
     document.body.appendChild(btn);
 
     btn.addEventListener("click", () => {
-      CONFIG.PARTICLE_COLOR = CONFIG.PARTICLE_COLOR === "0,255,0" ? "255,0,0" : "0,255,0";
+      // Partikül rengi
+      CONFIG.PARTICLE_COLOR = CONFIG.PARTICLE_COLOR === "0,255,0" ? "255,77,77" : "0,255,0";
       particles.forEach(p => p.color = CONFIG.PARTICLE_COLOR);
+
+      // Sayfadaki ögelerin rengi
+      const isGreen = CONFIG.PARTICLE_COLOR === "0,255,0";
+      const newColor = isGreen ? "#00ff00" : "#ff4d4d";
+      const bgColor = isGreen ? "rgba(0,255,0,0.7)" : "rgba(20,0,0,0.7)";
+      const boxShadow = isGreen ? "0 0 8px #00ff00" : "0 0 8px #ff4d4d";
+
+      const sidebarButtons = document.querySelectorAll("#sidebar button, #langSwitch, #mainHeader, #loginTitle");
+      sidebarButtons.forEach(el => {
+        el.style.background = bgColor;
+        el.style.color = newColor;
+        el.style.boxShadow = boxShadow;
+      });
     });
   }
 
