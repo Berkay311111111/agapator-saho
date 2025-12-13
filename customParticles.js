@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Particle.js Full Screen</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000; /* Arka plan siyah */
+  }
+</style>
+</head>
+<body>
+
+<script>
 (function () {
   "use strict";
 
@@ -163,3 +180,7 @@
   }
 
 })();
+</script>
+
+</body>
+</html>
