@@ -2,7 +2,8 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Code Tool Panel</title>
+<title>SAHO CHEATS Web Engine</title>
+
 <style>
 * { box-sizing: border-box; }
 
@@ -12,7 +13,7 @@ html, body {
   width:100%;
   height:100%;
   font-family:'Segoe UI', sans-serif;
-  background:#0d0d0d;
+  background:#0b0b0b;
   color:#fff;
 }
 
@@ -27,7 +28,7 @@ html, body {
   width:50%;
   padding:40px;
   background:#111;
-  border-right:2px solid #222;
+  border-right:2px solid #1f1f1f;
   overflow-y:auto;
 }
 
@@ -35,13 +36,20 @@ html, body {
 #rightPanel {
   width:50%;
   padding:40px;
-  background:#0f0f0f;
+  background:#0e0e0e;
   overflow-y:auto;
+  position:relative;
 }
 
+/* GENEL */
 h1 {
   color:#ff4d4d;
   margin-bottom:25px;
+}
+
+h2 {
+  color:#00ff99;
+  margin-top:30px;
 }
 
 input, select, textarea, button {
@@ -60,7 +68,7 @@ button {
   cursor:pointer;
 }
 
-.secondary {
+button.secondary {
   background:#00ff99;
 }
 
@@ -71,28 +79,53 @@ textarea {
 
 .section {
   margin-bottom:40px;
-  padding-bottom:20px;
+  padding-bottom:25px;
   border-bottom:1px solid #222;
 }
 
-.status {
-  margin-top:10px;
+/* GERİ BUTONU */
+#backBtn {
+  background:#222;
+  color:#ff4d4d;
+  width:200px;
+  margin-bottom:25px;
+}
+
+/* PASİF ALAN */
+.disabled-area {
+  opacity:0.35;
+  pointer-events:none;
+}
+
+/* SOON YAZISI */
+#soonBadge {
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#ff4d4d;
+  color:#000;
+  padding:10px 18px;
   font-weight:bold;
-  color:#00ff99;
+  border-radius:8px;
+  font-size:18px;
 }
 </style>
 </head>
+
 <body>
 
 <div id="app">
 
-<!-- SOL: CONVERTER -->
+<!-- SOL PANEL -->
 <div id="leftPanel">
+
+  <button id="backBtn" onclick="goBack()">← Geri</button>
+
   <h1>Code Converter</h1>
 
   <div class="section">
-    <input id="inputValue" placeholder="FF FF 255 101010" />
-    
+    <input id="inputValue" placeholder="FF FF 255 101010">
+
     <select id="conversionType">
       <option value="hexToDec">Hex → Decimal</option>
       <option value="decToHex">Decimal → Hex</option>
@@ -105,33 +138,48 @@ textarea {
     <button onclick="convert()">Dönüştür</button>
     <button class="secondary" onclick="copyResult()">Sonucu Kopyala</button>
 
-    <textarea id="result" placeholder="Sonuç burada..."></textarea>
+    <textarea id="result" placeholder="Sonuç..."></textarea>
   </div>
 </div>
 
-<!-- SAĞ: SCANNER PANEL (UI ONLY) -->
+<!-- SAĞ PANEL -->
 <div id="rightPanel">
-  <h1>HD‑Player Scanner</h1>
 
-  <div class="section">
-    <input placeholder="Process Name (HD-Player)" disabled value="HD-Player"/>
-    <textarea placeholder="Pattern (FF FF ?? 00 00)"></textarea>
+  <div id="soonBadge">SOON..</div>
 
-    <button onclick="fakeScan()">Scan</button>
-    <button onclick="fakeApply()">Apply Change</button>
+  <h1>SAHO CHEATS<br>Web Engine HD Player Scanner</h1>
 
-    <div class="status" id="scanStatus">Status: Idle</div>
+  <!-- AIMBOT -->
+  <div class="section disabled-area">
+    <h2>AIMBOT SEARCH & REPLACE SYSTEM</h2>
+
+    <input placeholder="Process: HD-Player">
+    <textarea placeholder="AOB Pattern"></textarea>
+
+    <button>Scan</button>
+    <button>Replace</button>
   </div>
 
-  <div class="section">
-    <h2>Log</h2>
-    <textarea id="logArea" placeholder="Scan logs..." readonly></textarea>
+  <!-- PERMANENT -->
+  <div class="section disabled-area">
+    <h2>PERMANENT AOB SCAN & REPLACE SYSTEM</h2>
+
+    <textarea placeholder="Permanent AOB Pattern"></textarea>
+    <textarea placeholder="Replace Value"></textarea>
+
+    <button>Permanent Scan</button>
+    <button>Permanent Apply</button>
   </div>
+
 </div>
 
 </div>
 
 <script>
+function goBack(){
+  window.location.href = "index.html";
+}
+
 function convert(){
   const input = document.getElementById("inputValue").value.trim();
   const type = document.getElementById("conversionType").value;
@@ -140,24 +188,12 @@ function convert(){
 
   values.forEach(v=>{
     switch(type){
-      case 'hexToDec':
-        out.push(parseInt(v,16));
-        break;
-      case 'decToHex':
-        out.push(parseInt(v,10).toString(16).toUpperCase());
-        break;
-      case 'binToDec':
-        out.push(parseInt(v,2));
-        break;
-      case 'decToBin':
-        out.push(parseInt(v,10).toString(2));
-        break;
-      case 'cppToCsharp':
-        out.push(v.toUpperCase());
-        break;
-      case 'csharpToCpp':
-        out.push(v.toUpperCase());
-        break;
+      case 'hexToDec': out.push(parseInt(v,16)); break;
+      case 'decToHex': out.push(parseInt(v,10).toString(16).toUpperCase()); break;
+      case 'binToDec': out.push(parseInt(v,2)); break;
+      case 'decToBin': out.push(parseInt(v,10).toString(2)); break;
+      case 'cppToCsharp': out.push(v.toUpperCase()); break;
+      case 'csharpToCpp': out.push(v.toUpperCase()); break;
     }
   });
 
@@ -169,17 +205,6 @@ function copyResult(){
   navigator.clipboard.writeText(
     document.getElementById("result").value
   );
-}
-
-/* SAĞ PANEL – PLACEHOLDER */
-function fakeScan(){
-  document.getElementById("scanStatus").innerText = "Status: Scanning...";
-  document.getElementById("logArea").value += "[+] Scan started...\n";
-}
-
-function fakeApply(){
-  document.getElementById("scanStatus").innerText = "Status: Applied";
-  document.getElementById("logArea").value += "[+] Changes applied.\n";
 }
 </script>
 
