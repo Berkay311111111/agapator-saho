@@ -4,177 +4,185 @@
 <meta charset="UTF-8">
 <title>AGAPATOR SAHO</title>
 <style>
-body, html {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family:'Segoe UI', sans-serif;
-  background:#102010; /* ana arka plan */
-  color:#fff;
-  overflow:hidden;
-  transition: background 0.5s, color 0.5s;
-}
+  /* GENEL */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: #102010;
+    color: #fff;
+    overflow: hidden;
+  }
 
-/* GENEL KONTAINER */
-.container {
-  display:flex;
-  height:100%;
-  transition: background 0.5s;
-}
+  /* CONTAINER */
+  .container {
+    display: flex;
+    height: 100%;
+  }
 
-/* SIDEBAR */
-#sidebar {
-  width:220px;
-  background:rgba(0,0,0,0.8);
-  padding:20px;
-  box-sizing:border-box;
-  display:flex;
-  flex-direction:column;
-  z-index:2;
-  position:relative;
-}
-#sidebar button {
-  margin:10px 0;
-  padding:12px;
-  background:rgba(20,0,0,0.7);
-  border:none;
-  color:#fff;
-  cursor:pointer;
-  border-radius:8px;
-  transition:0.3s;
-  text-align:left;
-  font-weight:bold;
-  box-shadow:0 0 5px rgb(0,255,128);
-}
-#sidebar button:hover {
-  background:#00ff80; /* neon-yeşil */
-  color:#000;
-  box-shadow:0 0 15px rgb(0,255,128);
-}
+  /* SIDEBAR */
+  #sidebar {
+    width: 220px;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    position: relative;
+  }
 
-/* MAIN */
-#main {
-  flex:1;
-  padding:20px;
-  box-sizing:border-box;
-  overflow-y:auto;
-  position:relative;
-}
-#mainHeader {
-  font-size:48px;
-  font-weight:bold;
-  color:#00ff80;
-  text-align:center;
-  margin-bottom:30px;
-  text-shadow:0 0 12px rgba(0,255,128,0.8);
-  position:sticky;
-  top:0;
-  padding:10px 0;
-  z-index:10;
-  transition: color 0.5s, text-shadow 0.5s;
-}
+  #sidebar button {
+    margin: 10px 0;
+    padding: 12px;
+    background: rgba(20,0,0,0.7);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgb(0,255,0);
+    text-align: left;
+    transition: 0.3s;
+  }
 
-/* TABLER */
-.tab {
-  display:none;
-  opacity:0;
-  transform:translateY(20px);
-  transition:0.4s ease;
-}
-.tab.active {
-  display:block;
-  opacity:1;
-  transform:translateY(0);
-}
+  #sidebar button:hover {
+    background: #00ff00;
+    color: #000;
+    box-shadow: 0 0 15px rgb(0,255,0);
+  }
 
-/* LOGIN */
-#loginTab {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100%;
-  z-index:3;
-  background:transparent; /* login arkaplanı yok */
-}
-#loginTitle {
-  font-size:48px;
-  font-weight:bold;
-  color:#00ff80;
-  margin-bottom:30px;
-  text-shadow:0 0 12px rgba(0,255,128,0.8);
-  transition: color 0.5s, text-shadow 0.5s;
-}
-#loginForm {
-  display:flex;
-  flex-direction:column;
-  max-width:350px;
-  width:100%;
-}
-#loginForm input {
-  margin:10px 0;
-  padding:12px;
-  border-radius:6px;
-  border:none;
-  font-size:16px;
-  color:#fff;
-  font-weight:bold;
-  background:#111;
-}
-#loginForm button {
-  padding:12px;
-  border:none;
-  border-radius:6px;
-  background:#00ff80;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-  transition: background 0.5s;
-}
+  /* MAIN */
+  #main {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+  }
 
-/* ITEM */
-.item {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:12px 0;
-  padding:10px;
-  background:rgba(0,0,0,0.5);
-  border-radius:8px;
-  box-shadow:0 0 8px rgb(0,255,128);
-  transition: box-shadow 0.5s, border 0.5s;
-  color:#fff;
-}
-.item a {
-  padding:8px 15px;
-  border-radius:6px;
-  background:#222;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-  transition: background 0.5s, color 0.5s;
-}
-.item a:hover {
-  background:#00ff80;
-  color:#000;
-}
+  #mainHeader {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px rgba(255,255,255,0.8);
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    z-index: 10;
+  }
 
-/* LANG BUTTON */
-#langSwitch {
-  position:absolute;
-  top:10px;
-  right:10px;
-  padding:6px 12px;
-  background:#00ff80;
-  color:#000;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-  z-index:20;
-  transition: background 0.5s, color 0.5s;
-  box-shadow:0 0 10px rgb(0,255,128);
-}
+  /* TAB */
+  .tab {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.4s ease;
+  }
+
+  .tab.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* LOGIN */
+  #loginTab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 3;
+  }
+
+  #loginTitle {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px rgba(255,255,255,0.8);
+  }
+
+  #loginForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    width: 100%;
+  }
+
+  #loginForm input {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    background: #111;
+  }
+
+  #loginForm button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #00ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #loginForm button:hover {
+    background: #00cc00;
+  }
+
+  #errorMsg {
+    color: red;
+    margin-top: 10px;
+  }
+
+  /* ITEM */
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgb(0,255,0);
+    color: #fff;
+  }
+
+  .item a {
+    padding: 8px 15px;
+    border-radius: 6px;
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .item a:hover {
+    background: #00ff00;
+    color: #000;
+  }
+
+  /* CANVAS PARTICLE */
+  #particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
@@ -185,11 +193,11 @@ body, html {
   <form id="loginForm">
     <input type="text" id="keyInput" placeholder="Giriş Key" required>
     <button type="submit">Giriş</button>
-    <p id="errorMsg" style="color:red;"></p>
+    <p id="errorMsg"></p>
   </form>
 </div>
 
-<!-- ANA KONTAINER -->
+<!-- MAIN CONTAINER -->
 <div class="container" id="mainContainer" style="display:none;">
   <div id="sidebar">
     <button data-tab="games">Oyun İndirme</button>
@@ -198,15 +206,14 @@ body, html {
     <button data-tab="emulator">Emulator</button>
     <button data-tab="freefire">Free Fire</button>
     <button data-tab="tools">Tools</button>
-    <button onclick="window.location.href='codeConverter.html'">Code Converter</button>
   </div>
-
   <div id="main">
     <div id="mainHeader">SAHO AGAPATOR</div>
 
-    <!-- OYUNLAR -->
+
+   <!-- OYUNLAR -->
     <div class="tab" id="games">
-      <h2>Oyun İndirme Linkleri</h2>
+      <h2 style="color:#00ff00;">Oyun İndirme Linkleri</h2>
       <div class="item"><span>The Forest 🌳 🪓<br>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Macera</span><a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank">İndir</a></div>
       <div class="item"><span>Chained Together ⛓️<br>Min Sistem: i3 / 4GB RAM / HD 4000 | Multiplayer: Evet | Tür: Eğlence</span><a href="https://drive.google.com/file/d/1TzAow9eP_Fivq2j0jwZq7boFPYpeksgn/view" target="_blank">İndir</a></div>
       <div class="item"><span>Pushing It Together 🤝<br>Min Sistem: i3 / 4GB RAM | Multiplayer: Evet | Tür: Eğlence</span><a href="https://drive.google.com/file/d/1O90hjDI5uVu4JMaQ8PT7dOyulTftKd9T/view" target="_blank">İndir</a></div>
@@ -221,7 +228,7 @@ body, html {
 
     <!-- FIX -->
     <div class="tab" id="fix">
-      <h2>Fix Error</h2>
+      <h2 style="color:#00ff00;">Fix Error</h2>
       <div class="item"><span>Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a></div>
       <div class="item"><span>Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a></div>
       <div class="item"><span>DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a></div>
@@ -230,7 +237,7 @@ body, html {
 
     <!-- TWEAK -->
     <div class="tab" id="tweak">
-      <h2>4v4 için Ideal Ayarlar</h2>
+      <h2 style="color:#00ff00;">4v4 için Ideal Ayarlar</h2>
       <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
       <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
       <p>🔹 18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
@@ -242,7 +249,7 @@ body, html {
 
     <!-- EMULATOR -->
     <div class="tab" id="emulator">
-      <h2>Emülatörler</h2>
+      <h2 style="color:#00ff00;">Emülatörler</h2>
       <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
       <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
       <div class="item"><span>BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
@@ -250,82 +257,113 @@ body, html {
 
     <!-- FREE FIRE -->
     <div class="tab" id="freefire">
-      <h2>Free Fire</h2>
+      <h2 style="color:#00ff00;">Free Fire</h2>
       <div class="item"><span>Free Fire x86 (Amazon) <br><small>Min Sistem: 2GB RAM / Android 5.0 | FPS: Orta | External/Internal Uyumlu</small></span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
       <div class="item"><span>Free Fire Max x86 Native <br><small>Min Sistem: 3GB RAM / Android 6.0 | FPS: Yüksek | External/Internal Uyumlu</small></span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank">İndir</a></div>
     </div>
 
     <!-- TOOLS -->
     <div class="tab" id="tools">
-      <h2>Tools</h2>
+      <h2 style="color:#00ff00;">Tools</h2>
       <div class="item"><span>Chams Menu 64 Bit <br><small>External ve Internal panellerle uyumlu</small></span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
       <div class="item"><span>Extreme Injector v3 <br><small>External ve Internal panellerle uyumlu</small></span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
       <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER <br><small>External/Internal destek</small></span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
       <div class="item"><span>Winrar x64</span><a href="https://www.mediafire.com/file/6z050qr2p4ryxfu/winrar-x64-713.exe/file" target="_blank">İndir</a></div>
     </div>
-
   </div>
 </div>
 
 <script>
-// LOGIN
-const loginForm=document.getElementById('loginForm');
-const loginTab=document.getElementById('loginTab');
-const mainContainer=document.getElementById('mainContainer');
-const errorMsg=document.getElementById('errorMsg');
-const keyInput=document.getElementById('keyInput');
-function __Ω(){const x=[83,65],y=[72,79],z=[49,50,51];return [...x,...y,...z].map(n=>String.fromCharCode(n)).join('');}
-loginForm.addEventListener('submit', e => {
-  e.preventDefault();
-  if (keyInput.value === __Ω()) {
-    loginTab.style.display = 'none';
-    mainContainer.style.display = 'flex';
-    activateTab('games');
-    startParticles();
-  } else { errorMsg.textContent = 'Yanlış Key!'; }
-});
+  // LOGIN SİSTEMİ
+  const loginForm = document.getElementById('loginForm');
+  const loginTab = document.getElementById('loginTab');
+  const mainContainer = document.getElementById('mainContainer');
+  const errorMsg = document.getElementById('errorMsg');
+  const keyInput = document.getElementById('keyInput');
 
-// TAB
-const tabs=document.querySelectorAll('.tab');
-function activateTab(id){
-  tabs.forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-document.querySelectorAll('#sidebar button[data-tab]').forEach(b=>b.onclick=()=>activateTab(b.dataset.tab));
+  function correctKey() {
+    // Key: SAHO12
+    return "SAHO12";
+  }
 
-// PARTICLES
-function startParticles(){
-  const CONFIG={PARTICLE_COUNT:160,PARTICLE_COLOR:"0,255,128",MAX_DISTANCE:150,MOUSE_RADIUS:180,SPEED:1.4,BACKGROUND_CLEAR:true};
-  let canvas=document.createElement("canvas"),ctx, width, height, particles=[], mouse={x:null,y:null};
-  canvas.id="particleCanvas"; canvas.style.position="fixed"; canvas.style.top=0; canvas.style.left=0;
-  canvas.style.width="100%"; canvas.style.height="100%"; canvas.style.zIndex="0"; canvas.style.pointerEvents="none";
-  document.body.prepend(canvas);
-  ctx=canvas.getContext("2d");
-  function resizeCanvas(){width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;}
-  window.addEventListener("resize",resizeCanvas); resizeCanvas();
-  window.addEventListener("mousemove",e=>{mouse.x=e.clientX; mouse.y=e.clientY;});
-  window.addEventListener("mouseleave",()=>{mouse.x=null; mouse.y=null;});
-  class Particle{constructor(){this.reset();} reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.r=Math.random()*2+1;this.vx=(Math.random()-0.5)*CONFIG.SPEED;this.vy=(Math.random()-0.5)*CONFIG.SPEED;} update(){this.x+=this.vx; this.y+=this.vy; if(this.x>width||this.x<0||this.y>height||this.y<0)this.reset();} draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(${CONFIG.PARTICLE_COLOR},0.7)`;ctx.fill();} } 
-  for(let i=0;i<CONFIG.PARTICLE_COUNT;i++)particles.push(new Particle());
-  function animate(){
-    if(CONFIG.BACKGROUND_CLEAR)ctx.clearRect(0,0,width,height);
-    particles.forEach(p=>{p.update();p.draw();});
-    // lines
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        let dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-        let dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<CONFIG.MAX_DISTANCE){
-          ctx.strokeStyle=`rgba(${CONFIG.PARTICLE_COLOR},${1-dist/CONFIG.MAX_DISTANCE})`;
-          ctx.lineWidth=1;
-          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if(keyInput.value === correctKey()) {
+      loginTab.style.display = 'none';
+      mainContainer.style.display = 'flex';
+      activateTab('games');
+    } else {
+      errorMsg.textContent = 'Yanlış Key!';
+    }
+  });
+
+  // TAB SİSTEMİ
+  const tabs = document.querySelectorAll('.tab');
+  function activateTab(id) {
+    tabs.forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  document.querySelectorAll('#sidebar button[data-tab]').forEach(b => {
+    b.onclick = () => activateTab(b.dataset.tab);
+  });
+
+  // PARTICLE SİSTEMİ
+  function startParticles() {
+    const CONFIG = {PARTICLE_COUNT:160, PARTICLE_COLOR:"0,255,0", MAX_DISTANCE:150, MOUSE_RADIUS:180, SPEED:1.4, BACKGROUND_CLEAR:true};
+    let canvas = document.createElement("canvas"), ctx, width, height, particles=[], mouse={x:null,y:null};
+    canvas.id="particleCanvas";
+    document.body.prepend(canvas);
+    ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    window.addEventListener("mouseleave", () => { mouse.x = null; mouse.y = null; });
+
+    class Particle {
+      constructor(){ this.reset(); }
+      reset(){ this.x=Math.random()*width; this.y=Math.random()*height; this.r=Math.random()*2+1; this.vx=(Math.random()-0.5)*CONFIG.SPEED; this.vy=(Math.random()-0.5)*CONFIG.SPEED; this.color=CONFIG.PARTICLE_COLOR; }
+      update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<=0||this.x>=width)this.vx*=-1; if(this.y<=0||this.y>=height)this.vy*=-1; }
+      draw(){ ctx.fillStyle=`rgb(${this.color})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill(); }
+    }
+
+    function createParticles(){ particles=[]; for(let i=0;i<CONFIG.PARTICLE_COUNT;i++){ particles.push(new Particle()); } }
+    function connectParticles(){
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<CONFIG.MAX_DISTANCE){
+            ctx.strokeStyle=`rgba(${particles[i].color},${1-dist/CONFIG.MAX_DISTANCE})`;
+            ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke();
+          }
+        }
+        if(mouse.x!==null){
+          const dx=particles[i].x-mouse.x, dy=particles[i].y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<CONFIG.MOUSE_RADIUS){
+            ctx.strokeStyle=`rgba(${particles[i].color},${1-dist/CONFIG.MOUSE_RADIUS})`;
+            ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+          }
         }
       }
     }
-    requestAnimationFrame(animate);
+
+    function animate(){
+      if(CONFIG.BACKGROUND_CLEAR){ ctx.fillStyle="rgba(0,0,0,0.15)"; ctx.fillRect(0,0,width,height); }
+      particles.forEach(p=>{p.update(); p.draw();});
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+
+    createParticles();
+    animate();
   }
-  animate();
-}
+
+  startParticles();
 </script>
 
 </body>
