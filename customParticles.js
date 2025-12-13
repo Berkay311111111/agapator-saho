@@ -4,12 +4,11 @@
   /* ================= CONFIG ================= */
   const CONFIG = {
     PARTICLE_COUNT: 160,
-    PARTICLE_COLOR: "255,255,255",
+    PARTICLE_COLOR: "255, 255, 255", // sabit beyaz
     MAX_DISTANCE: 150,
     MOUSE_RADIUS: 180,
     SPEED: 2.4,
-    BACKGROUND_CLEAR: true,
-    COLOR_CHANGE_SPEED: 0.5 // renk değişim hızı
+    BACKGROUND_CLEAR: true
   };
 
   /* ================= CANVAS ================= */
@@ -73,8 +72,8 @@
       if (this.y <= 0 || this.y >= height) this.vy *= -1;
     }
 
-    draw(color) {
-      ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},0.8)`;
+    draw() {
+      ctx.fillStyle = `rgba(${CONFIG.PARTICLE_COLOR}, 0.8)`;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
       ctx.fill();
@@ -92,7 +91,7 @@
   }
 
   /* ================= CONNECTIONS ================= */
-  function connectParticles(color) {
+  function connectParticles() {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -100,7 +99,7 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONFIG.MAX_DISTANCE) {
-          ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${1 - dist / CONFIG.MAX_DISTANCE})`;
+          ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR}, ${1 - dist / CONFIG.MAX_DISTANCE})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -111,7 +110,7 @@
     }
   }
 
-  function connectMouse(color) {
+  function connectMouse() {
     if (mouse.x === null) return;
 
     particles.forEach(p => {
@@ -120,7 +119,7 @@
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < CONFIG.MOUSE_RADIUS) {
-        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${1 - dist / CONFIG.MOUSE_RADIUS})`;
+        ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR}, ${1 - dist / CONFIG.MOUSE_RADIUS})`;
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
@@ -130,42 +129,9 @@
     });
   }
 
-  /* ================= COLOR ================= */
-  let hue = 0;
-  function getColor() {
-    hue += CONFIG.COLOR_CHANGE_SPEED;
-    if (hue > 360) hue = 0;
-    const c = hslToRgb(hue / 360, 0.7, 0.5);
-    return { r: c[0], g: c[1], b: c[2] };
-  }
-
-  function hslToRgb(h, s, l) {
-    let r, g, b;
-
-    if (s == 0) {
-      r = g = b = l; // achromatic
-    } else {
-      const hue2rgb = (p, q, t) => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1/6) return p + (q - p) * 6 * t;
-        if (t < 1/2) return q;
-        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-        return p;
-      };
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      const p = 2 * l - q;
-      r = hue2rgb(p, q, h + 1/3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1/3);
-    }
-
-    return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
-  }
-
   /* ================= ROTATING TOP ================= */
   let topAngle = 0;
-  function drawRotatingTop(color) {
+  function drawRotatingTop() {
     const radius = 30;
     const cx = width - 60;
     const cy = 60;
@@ -175,7 +141,7 @@
     ctx.translate(cx, cy);
     ctx.rotate(topAngle);
 
-    ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},0.6)`;
+    ctx.fillStyle = `rgba(${CONFIG.PARTICLE_COLOR}, 0.6)`;
     ctx.beginPath();
     ctx.arc(0, 0, radius, 0, Math.PI * 2);
     ctx.fill();
@@ -188,21 +154,20 @@
     ctx.clearRect(0, 0, width, height);
   }
 
-  function update(color) {
+  function update() {
     particles.forEach(p => {
       p.update();
-      p.draw(color);
+      p.draw();
     });
   }
 
   function animate() {
     if (CONFIG.BACKGROUND_CLEAR) clear();
 
-    const color = getColor();
-    update(color);
-    connectParticles(color);
-    connectMouse(color);
-    drawRotatingTop(color);
+    update();
+    connectParticles();
+    connectMouse();
+    drawRotatingTop();
 
     requestAnimationFrame(animate);
   }
