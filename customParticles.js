@@ -5,16 +5,21 @@ document.body.appendChild(canvas);
 
 canvas.id = "particleCanvas";
 canvas.style.position = "fixed";
-canvas.style.top = 0;
-canvas.style.left = 0;
+canvas.style.top = "0";
+canvas.style.left = "0";
 canvas.style.width = "100%";
 canvas.style.height = "100%";
-canvas.style.zIndex = -1;
+canvas.style.zIndex = "-1";
 
 const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
 
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+
+/* ================= MOUSE ================= */
 const mouse = {
   x: null,
   y: null,
@@ -26,76 +31,77 @@ window.addEventListener("mousemove", e => {
   mouse.y = e.clientY;
 });
 
-window.addEventListener("mouseout", () => {
+window.addEventListener("mouseleave", () => {
   mouse.x = null;
   mouse.y = null;
 });
 
+/* ================= PARTICLE ================= */
 class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = (Math.random() - 0.5) * 1.2;
-    this.speedY = (Math.random() - 0.5) * 1.2;
+    this.radius = Math.random() * 2 + 1;
+    this.vx = (Math.random() - 0.5) * 1.2;
+    this.vy = (Math.random() - 0.5) * 1.2;
   }
 
   update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
+    this.x += this.vx;
+    this.y += this.vy;
 
-    if (this.x <= 0 || this.x >= canvas.width) this.speedX *= -1;
-    if (this.y <= 0 || this.y >= canvas.height) this.speedY *= -1;
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
   }
 
   draw() {
     ctx.fillStyle = "#ff4d4d";
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
   }
 }
 
-const particlesArray = [];
-const COUNT = 140;
+/* ================= CREATE PARTICLES ================= */
+const particles = [];
+const PARTICLE_COUNT = 140;
 
-for (let i = 0; i < COUNT; i++) {
-  particlesArray.push(new Particle());
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  particles.push(new Particle());
 }
 
+/* ================= PARTICLE ↔ PARTICLE LINES ================= */
 function connectParticles() {
-  for (let i = 0; i < particlesArray.length; i++) {
-    for (let j = i + 1; j < particlesArray.length; j++) {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
-      const dx = particlesArray[i].x - particlesArray[j].x;
-      const dy = particlesArray[i].y - particlesArray[j].y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 150) {
-        const opacity = 1 - distance / 150;
-        ctx.strokeStyle = `rgba(255,77,77,${opacity})`;
-        ctx.lineWidth = 0.8;
+      if (dist < 150) {
+        ctx.strokeStyle = `rgba(255,77,77,${1 - dist / 150})`;
+        ctx.lineWidth = 0.7;
         ctx.beginPath();
-        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
         ctx.stroke();
       }
     }
   }
 }
 
-function connectToMouse() {
-  if (mouse.x === null) return;
+/* ================= MOUSE ↔ PARTICLE LINES ================= */
+function connectMouse() {
+  if (!mouse.x) return;
 
-  particlesArray.forEach(p => {
+  particles.forEach(p => {
     const dx = mouse.x - p.x;
     const dy = mouse.y - p.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance < mouse.radius) {
-      const opacity = 1 - distance / mouse.radius;
-      ctx.strokeStyle = `rgba(255,77,77,${opacity})`;
-      ctx.lineWidth = 2;
+    if (dist < mouse.radius) {
+      ctx.strokeStyle = `rgba(255,77,77,${1 - dist / mouse.radius})`;
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(mouse.x, mouse.y);
       ctx.lineTo(p.x, p.y);
@@ -104,23 +110,21 @@ function connectToMouse() {
   });
 }
 
+/* ================= ANIMATE ================= */
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  particlesArray.forEach(p => {
+  particles.forEach(p => {
     p.update();
     p.draw();
   });
 
-  connectParticles(); // 🔴 particle → particle
-  connectToMouse();   // 🕷️ mouse → particle
+  connectParticles(); // particle ↔ particle
+  connectMouse();     // mouse ↔ particle
 
   requestAnimationFrame(animate);
 }
 
 animate();
 
-window.addEventListener("resize", () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-});
+window.addEventListener("resize", resizeCanvas);
