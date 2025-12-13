@@ -11,6 +11,7 @@ html, body {
   background:#0d0d0d;
   color:#fff;
   height:100%;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -18,18 +19,23 @@ html, body {
 
 #converterContainer {
   background:#1a1a1a;
-  padding:40px 50px;
+  padding:40px;
   border-radius:12px;
-  text-align:center;
-  box-shadow: 0 0 30px rgba(255, 77, 77, 0.6);
-  width: 90%;
-  max-width: 900px;
+  box-shadow: 0 0 40px rgba(255, 77, 77, 0.6);
+  width:95%;
+  max-width:1200px;
+  height:90%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  overflow-y:auto;
 }
 
 h1 {
   color:#ff4d4d;
+  font-size:40px;
   margin-bottom:30px;
-  font-size:36px;
 }
 
 input, select, button {
@@ -37,12 +43,12 @@ input, select, button {
   margin:10px 0;
   border-radius:8px;
   border:none;
-  font-size:18px;
+  font-size:20px;
 }
 
 input, select {
-  width:80%;
-  max-width:400px;
+  width:90%;
+  max-width:600px;
 }
 
 button {
@@ -50,16 +56,20 @@ button {
   color:#000;
   cursor:pointer;
   font-weight:bold;
-  width:220px;
+  width:250px;
   margin-top:10px;
 }
 
 #result {
   margin-top:25px;
-  font-size:20px;
+  font-size:22px;
   font-weight:bold;
   color:#00ff99;
   word-wrap: break-word;
+  width:90%;
+  max-width:800px;
+  min-height:60px;
+  text-align:center;
 }
 
 #copyBtn {
@@ -72,7 +82,8 @@ button {
   margin-bottom:20px;
   background:#222;
   color:#ff4d4d;
-  width:150px;
+  width:180px;
+  font-size:18px;
 }
 </style>
 </head>
@@ -82,13 +93,18 @@ button {
   <button id="backBtn" onclick="goBack()">← Geri</button>
   <h1>Code Converter</h1>
   
-  <input type="text" id="inputValue" placeholder="Sayıları veya harfleri girin">
+  <input type="text" id="inputValue" placeholder="Sayıları veya harfleri girin (örn: FF 255 AA)">
   <br>
   <select id="conversionType">
     <option value="hexToDec">Hex → Decimal</option>
     <option value="decToHex">Decimal → Hex</option>
     <option value="cppToCsharp">C++ → C#</option>
     <option value="csharpToCpp">C# → C++</option>
+    <option value="binToDec">Binary → Decimal</option>
+    <option value="decToBin">Decimal → Binary</option>
+    <option value="decToOct">Decimal → Octal</option>
+    <option value="octToDec">Octal → Decimal</option>
+    <!-- Daha fazla dönüştürme buraya eklenebilir -->
   </select>
   <br>
   <button onclick="convert()">Dönüştür</button>
@@ -112,37 +128,67 @@ function convert(){
     return;
   }
 
-  // Boşluk veya virgülle ayırıyoruz
   const values = input.split(/[\s,]+/);
   let results = [];
 
-  if(type === 'hexToDec'){
-    values.forEach(v => {
-      const decimal = parseInt(v, 16);
-      results.push(isNaN(decimal) ? `${v} → Geçersiz Hex` : decimal);
-    });
-    resultDiv.textContent = results.join(' ');
-  } 
-  else if(type === 'decToHex'){
-    values.forEach(v => {
-      const num = parseInt(v, 10);
-      results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(16).toUpperCase());
-    });
-    resultDiv.textContent = results.join(' ');
-  } 
-  else if(type === 'cppToCsharp'){
-    // C++ girişi (FF, FF) → C# boşlukla
-    values.forEach(v => {
-      results.push(v.toUpperCase());
-    });
-    resultDiv.textContent = results.join(' ');
-  } 
-  else if(type === 'csharpToCpp'){
-    // C# girişi (FF FF) → C++ virgül ile
-    values.forEach(v => {
-      results.push(v.toUpperCase());
-    });
-    resultDiv.textContent = results.join(', ');
+  switch(type){
+    case 'hexToDec':
+      values.forEach(v => {
+        const decimal = parseInt(v,16);
+        results.push(isNaN(decimal) ? `${v} → Geçersiz Hex` : decimal);
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'decToHex':
+      values.forEach(v => {
+        const num = parseInt(v,10);
+        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(16).toUpperCase());
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'cppToCsharp':
+      values.forEach(v => results.push(v.toUpperCase()));
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'csharpToCpp':
+      values.forEach(v => results.push(v.toUpperCase()));
+      resultDiv.textContent = results.join(', ');
+      break;
+
+    case 'binToDec':
+      values.forEach(v => {
+        const decimal = parseInt(v,2);
+        results.push(isNaN(decimal) ? `${v} → Geçersiz Binary` : decimal);
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'decToBin':
+      values.forEach(v => {
+        const num = parseInt(v,10);
+        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(2));
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'decToOct':
+      values.forEach(v => {
+        const num = parseInt(v,10);
+        results.push(isNaN(num) ? `${v} → Geçersiz Decimal` : num.toString(8));
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
+
+    case 'octToDec':
+      values.forEach(v => {
+        const decimal = parseInt(v,8);
+        results.push(isNaN(decimal) ? `${v} → Geçersiz Octal` : decimal);
+      });
+      resultDiv.textContent = results.join(' ');
+      break;
   }
 }
 
