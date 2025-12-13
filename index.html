@@ -4,59 +4,34 @@
 <meta charset="UTF-8">
 <title>AGAPATOR SAHO</title>
 <style>
-body, html {
-  margin:0; padding:0; height:100%; font-family: 'Segoe UI', sans-serif; background:#0d0d0d; color:#fff; overflow:hidden;
-}
-
-/* Container ve sol sidebar */
-.container { display:flex; height:100%; background: linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f); }
+body, html { margin:0; padding:0; height:100%; font-family:'Segoe UI', sans-serif; background:#0d0d0d; color:#fff; overflow:hidden; }
+.container { display:flex; height:100%; background: linear-gradient(120deg,#2c0a0a,#5c1a1a,#3e0f0f); }
 #sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; z-index:2; position:relative; }
 #sidebar button { margin:10px 0; padding:12px; background:rgba(20,0,0,0.7); border:none; color:#ff4d4d; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #ff4d4d; }
 #sidebar button:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
-
-/* Ana içerik */
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; z-index:2; }
-#mainHeader {
-  font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px;
-  text-shadow:0 0 12px rgba(255,77,77,0.8); position:sticky; top:0; padding:10px 0; z-index:10; background:none;
-}
-
-/* Dil butonu */
-#langSwitch {
-  position:absolute; top:10px; right:10px; padding:6px 12px;
-  background:#ff4d4d; color:#000; border:none; border-radius:6px; cursor:pointer; font-weight:bold; z-index:20;
-}
-
-/* Sekmeler ve animasyon */
+#mainHeader { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow:0 0 12px rgba(255,77,77,0.8); position:sticky; top:0; padding:10px 0; z-index:10; background:none; }
+#langSwitch { position:absolute; top:10px; right:10px; padding:6px 12px; background:#ff4d4d; color:#000; border:none; border-radius:6px; cursor:pointer; font-weight:bold; z-index:20; }
 .tab { display:none; opacity:0; transform:translateY(20px); transition:0.4s ease; }
 .tab.active { display:block; opacity:1; transform:translateY(0); }
-
-/* Login ekranı */
 #loginTab { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; z-index:3; position:relative; }
-#loginTitle { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow: 0 0 12px rgba(255,77,77,0.8); }
+#loginTitle { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow:0 0 12px rgba(255,77,77,0.8); }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
 #loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; color:red; font-weight:bold; }
 #loginForm button { padding:12px; border:none; border-radius:6px; background:#ff4d4d; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
 #loginForm button:hover { background:#ff8080; }
-#loginForm label { display:none; }
-
 .item { display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:10px; background:rgba(0,0,0,0.5); border-radius:8px; box-shadow:0 0 8px #ff4d4d; transition:0.3s; }
 .item:hover { background:rgba(0,0,0,0.7); box-shadow:0 0 15px #ff4d4d; }
 .item a { padding:8px 15px; border-radius:6px; background:#222; color:#ff4d4d; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 5px #ff4d4d; }
 .item a:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
-
 #main::-webkit-scrollbar { width:8px; }
 #main::-webkit-scrollbar-thumb { background:#ff4d4d; border-radius:4px; }
-
-#particleCanvas {
-  position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; display:block;
-}
+#particleCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; display:block; }
 </style>
 </head>
 <body>
 
 <canvas id="particleCanvas"></canvas>
-
 <button id="langSwitch">EN / TR</button>
 
 <div id="loginTab" class="tab active">
@@ -83,88 +58,79 @@ body, html {
     <!-- Oyun İndirme -->
     <div class="tab" id="games">
       <h2 class="lang" data-tr="Oyun İndirme Linkleri" data-en="Game Download Links">Oyun İndirme Linkleri</h2>
-      <div class="item"><span>The Forest 🌳 🪓 <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Macera</small></span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>The Forest 🌳 🪓 <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Macera</small></span><a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>Chained Together ⛓️ <br><small>Min Sistem: i3 / 4GB RAM / HD 4000 | Multiplayer: Evet | Tür: Eğlence</small></span><a href="https://drive.google.com/file/d/1TzAow9eP_Fivq2j0jwZq7boFPYpeksgn/view?usp=drive_link" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>Pushing It Together 🤝 <br><small>Min Sistem: i3 / 4GB RAM | Multiplayer: Evet | Tür: Eğlence</small></span><a href="https://drive.google.com/file/d/1O90hjDI5uVu4JMaQ8PT7dOyulTftKd9T/view?usp=sharing" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>Ranch Simulator 🐄 <br><small>Min Sistem: i5 / 8GB RAM / GTX 650 | Multiplayer: Hayır | Tür: Simülasyon</small></span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>Far Cry 3 🌴🔥 <br><small>Min Sistem: i5 / 4GB RAM / GTX 460 | Multiplayer: Hayır | Tür: Aksiyon</small></span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>PC Building Simulator 🖥️ (rar: 12345) <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Hayır | Tür: Simülasyon</small></span><a href="https://drive.google.com/drive/folders/1c64odw5r7RxNuWOx-fM8scOY7jY7GIsn" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>PC Building Simulator 2 🖥️ (rar: 12345) <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Hayır | Tür: Simülasyon</small></span><a href="https://drive.google.com/drive/folders/1fOBKpRJMubut1q6vkZGL_OTKIrihRfBl" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>State of Decay 2 Juggernaut Edition 🧟 (rar: 12345) <br><small>Min Sistem: i5 / 8GB RAM / GTX 660 | Multiplayer: Evet | Tür: Korku-Aksiyon</small></span><a href="https://drive.google.com/drive/folders/1IyzLrIHmC6bLEIK0Zq8o9kl3gd-v-ATv" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>DEVOUR ☠️ (rar: 12345) <br><small>Min Sistem: i5 / 8GB RAM / GTX 750 | Multiplayer: Hayır | Tür: Korku</small></span><a href="https://www.mediafire.com/file/w1vvqjzj6wgiz4c/DEVOUR_v4.3.9-Oyunindirvip.zip/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span>Soon..</span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
     </div>
 
     <!-- Fix Error -->
     <div class="tab" id="fix">
       <h2 class="lang" data-tr="Fix Error" data-en="Fix Error">Fix Error</h2>
-      <div class="item"><span class="lang" data-tr="Visual Runtimes C++" data-en="Visual Runtimes C++">Visual Runtimes C++</span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Visual Runtimes C++" data-en="Visual Runtimes C++">Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Windows 10 Defender" data-en="Windows 10 Defender">Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="DirectX" data-en="DirectX">DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Hyper-V OFF" data-en="Hyper-V OFF">Hyper-V OFF</span><a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
     </div>
 
     <!-- Tweak -->
     <div class="tab" id="tweak">
       <h2 class="lang" data-tr="4v4 için Ideal Ayarlar" data-en="Ideal Settings for 4v4">4v4 için Ideal Ayarlar</h2>
       <p class="lang" data-tr="16450 – Varsayılan (EMÜLATÖR)" data-en="16450 – Default (EMULATOR)">16450 – Varsayılan (EMÜLATÖR)</p>
+      <p class="lang" data-tr="16458 – Standart Ayar Yeni Versiyon" data-en="16458 – Standard Setting New Version">16458 – Standart Ayar Yeni Versiyon</p>
+      <p class="lang" data-tr="18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!" data-en="18514 – Best Fit for 4v4! Almost No Errors!">18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
+      <p class="lang" data-tr="21058 – Hareketi Olanlar için En İyi Uyum!" data-en="21058 – Best Fit for Moving Players!">21058 – Hareketi Olanlar için En İyi Uyum!</p>
+      <p class="lang" data-tr="21066 – 21058’e Neredeyse Aynı" data-en="21066 – Almost Same as 21058">21066 – 21058’e Neredeyse Aynı</p>
+      <p class="lang" data-tr="16714 – İyi Bir Ayar, Farklı Hassasiyetleri Denemeye Değer" data-en="16714 – Good Setting, Worth Trying Different Sensitivities">16714 – İyi Bir Ayar, Farklı Hassasiyetleri Denemeye Değer</p>
+      <p class="lang" data-tr="8080**** – Önce 8080 ekleyerek farklı hassasiyet elde edebilirsiniz" data-en="8080**** – Add 8080 first to get different sensitivity">8080**** – Önce 8080 ekleyerek farklı hassasiyet elde edebilirsiniz</p>
     </div>
 
     <!-- Emulator -->
     <div class="tab" id="emulator">
       <h2 class="lang" data-tr="Emülatörler" data-en="Emulators">Emülatörler</h2>
-      <div class="item"><span class="lang" data-tr="MSI App Player" data-en="MSI App Player">MSI App Player</span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="MSI App Player 5.9.300.6315" data-en="MSI App Player 5.9.300.6315">MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="BlueStacks App Player 4.240.30.1002" data-en="BlueStacks App Player 4.240.30.1002">BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="BlueStacks App Player 5.12" data-en="BlueStacks App Player 5.12">BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
     </div>
 
     <!-- Free Fire -->
     <div class="tab" id="freefire">
       <h2 class="lang" data-tr="Free Fire" data-en="Free Fire">Free Fire</h2>
-      <div class="item"><span class="lang" data-tr="Free Fire x86" data-en="Free Fire x86">Free Fire x86</span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Free Fire x86 (Amazon)" data-en="Free Fire x86 (Amazon)">Free Fire x86 (Amazon) <br><small>Min Sistem: 2GB RAM / Android 5.0 | FPS: Orta | External/Internal Uyumlu</small></span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Free Fire Max x86 Native" data-en="Free Fire Max x86 Native">Free Fire Max x86 Native <br><small>Min Sistem: 3GB RAM / Android 6.0 | FPS: Yüksek | External/Internal Uyumlu</small></span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
     </div>
 
     <!-- Tools -->
     <div class="tab" id="tools">
       <h2 class="lang" data-tr="Tools" data-en="Tools">Tools</h2>
-      <div class="item"><span class="lang" data-tr="Chams Menu 64 Bit" data-en="Chams Menu 64 Bit">Chams Menu 64 Bit</span><a href="#" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Chams Menu 64 Bit" data-en="Chams Menu 64 Bit">Chams Menu 64 Bit</span><a href="https://www.mediafire.com/file/znml5w4yl9hwwv3/Chams_Menu_64_bit.zip/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
+      <div class="item"><span class="lang" data-tr="Nox Player Tweaks" data-en="Nox Player Tweaks">Nox Player Tweaks</span><a href="https://www.mediafire.com/file/abcd1234/Nox_Tweaks.zip/file" target="_blank" class="lang" data-tr="İndir" data-en="Download">İndir</a></div>
     </div>
 
   </div>
 </div>
 
 <script>
-// --- PARTICLE SİSTEMİ ---
-const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
-function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+// --- PARTICLE ---
+const canvas=document.getElementById('particleCanvas'); const ctx=canvas.getContext('2d'); function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;} window.addEventListener('resize',resizeCanvas); resizeCanvas();
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=(Math.random()-0.5)*2;this.speedY=(Math.random()-0.5)*2;} update(){this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>canvas.width)this.speedX*=-1; if(this.y<0||this.y>canvas.height)this.speedY*=-1;} draw(){ctx.fillStyle='#ff4d4d'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}}
+const particlesArray=[];for(let i=0;i<120;i++)particlesArray.push(new Particle()); function connect(){for(let a=0;a<particlesArray.length;a++){for(let b=a;b<particlesArray.length;b++){const dx=particlesArray[a].x-particlesArray[b].x; const dy=particlesArray[a].y-particlesArray[b].y; const distance=Math.sqrt(dx*dx+dy*dy); if(distance<150){ctx.strokeStyle='rgba(255,77,77,'+(1-distance/150)+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x,particlesArray[a].y); ctx.lineTo(particlesArray[b].x,particlesArray[b].y); ctx.stroke();}}}} function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particlesArray.forEach(p=>{p.update();p.draw();}); connect(); requestAnimationFrame(animate);} animate();
 
-class Particle{
-  constructor(){this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*3+1; this.speedX=(Math.random()-0.5)*2; this.speedY=(Math.random()-0.5)*2;}
-  update(){this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>canvas.width)this.speedX*=-1; if(this.y<0||this.y>canvas.height)this.speedY*=-1;}
-  draw(){ctx.fillStyle='#ff4d4d'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}
-}
-const particlesArray=[];for(let i=0;i<120;i++)particlesArray.push(new Particle());
-function connect(){for(let a=0;a<particlesArray.length;a++){for(let b=a;b<particlesArray.length;b++){const dx=particlesArray[a].x-particlesArray[b].x; const dy=particlesArray[a].y-particlesArray[b].y; const distance=Math.sqrt(dx*dx+dy*dy); if(distance<150){ctx.strokeStyle='rgba(255,77,77,'+(1-distance/150)+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x,particlesArray[a].y); ctx.lineTo(particlesArray[b].x,particlesArray[b].y); ctx.stroke();}}}}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particlesArray.forEach(p=>{p.update(); p.draw();}); connect(); requestAnimationFrame(animate);}
-animate();
+// --- TAB ---
+const tabButtons=document.querySelectorAll('#sidebar button'); const tabs=document.querySelectorAll('.tab'); tabButtons.forEach(btn=>{btn.addEventListener('click',()=>{const target=btn.getAttribute('data-tab');tabs.forEach(t=>t.classList.remove('active'));document.getElementById(target).classList.add('active');});});
 
-// --- TAB GEÇİŞLERİ ---
-const tabButtons=document.querySelectorAll('#sidebar button');
-const tabs=document.querySelectorAll('.tab');
-tabButtons.forEach(btn=>{btn.addEventListener('click',()=>{const target=btn.getAttribute('data-tab');tabs.forEach(t=>t.classList.remove('active'));document.getElementById(target).classList.add('active');});});
+// --- LOGIN ---
+const validKeys=['npc117','reco117','umeyir117','savas117','saho117']; const loginForm=document.getElementById('loginForm'); const keyInput=document.getElementById('keyInput');
+loginForm.addEventListener('submit',e=>{e.preventDefault(); const key=keyInput.value.trim().toLowerCase(); if(validKeys.includes(key)){document.getElementById('loginTab').style.display='none'; document.getElementById('mainContainer').style.display='flex'; tabs[0].classList.add('active');} else{document.getElementById('errorMsg').innerText='Key hatalı';}});
 
-// --- LOGIN SİSTEMİ ---
-const validKeys=['npc117','reco117','umeyir117','savas117','saho117'];
-const loginForm=document.getElementById('loginForm');
-const keyInput=document.getElementById('keyInput');
-loginForm.addEventListener('submit', e=>{
-  e.preventDefault();
-  const key=keyInput.value.trim().toLowerCase();
-  if(validKeys.includes(key)){
-    document.getElementById('loginTab').style.display='none';
-    document.getElementById('mainContainer').style.display='flex';
-    tabs[0].classList.add('active');
-  } else { document.getElementById('errorMsg').innerText='Key hatalı'; }
-});
-
-// --- Dil Değiştirme ---
-let lang='tr';
-const langSwitch=document.getElementById('langSwitch');
-langSwitch.addEventListener('click',()=>{
-  lang=(lang==='tr')?'en':'tr';
-  document.querySelectorAll('.lang').forEach(el=>{
-    el.innerText=el.getAttribute(`data-${lang}`);
-  });
-});
+// --- LANG ---
+let lang='tr'; const langSwitch=document.getElementById('langSwitch'); langSwitch.addEventListener('click',()=>{lang=(lang==='tr')?'en':'tr'; document.querySelectorAll('.lang').forEach(el=>{el.innerText=el.getAttribute(`data-${lang}`);});});
 </script>
 
 </body>
