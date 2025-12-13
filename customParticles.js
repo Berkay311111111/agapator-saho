@@ -172,18 +172,32 @@
       CONFIG.PARTICLE_COLOR = CONFIG.PARTICLE_COLOR === "0,255,0" ? "255,77,77" : "0,255,0";
       particles.forEach(p => p.color = CONFIG.PARTICLE_COLOR);
 
-      // Sayfadaki ögelerin rengi
       const isGreen = CONFIG.PARTICLE_COLOR === "0,255,0";
-      const newColor = isGreen ? "#00ff00" : "#ff4d4d";
-      const bgColor = isGreen ? "rgba(0,255,0,0.7)" : "rgba(20,0,0,0.7)";
-      const boxShadow = isGreen ? "0 0 8px #00ff00" : "0 0 8px #ff4d4d";
 
+      // Temel renkler
+      const mainColor = isGreen ? "#00ff00" : "#ff4d4d";
+      const bgGradient = isGreen
+        ? "linear-gradient(120deg, #0a2c0a, #1a5c1a, #0f3e0f)"
+        : "linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f)";
+      const buttonBg = isGreen ? "rgba(0,255,0,0.7)" : "rgba(20,0,0,0.7)";
+      const boxShadow = isGreen ? "0 0 8px #00ff00" : "0 0 8px #ff4d4d";
+      const buttonColor = isGreen ? "#000" : "#ff4d4d";
+
+      // Sidebar, header, langSwitch, loginTitle
       const sidebarButtons = document.querySelectorAll("#sidebar button, #langSwitch, #mainHeader, #loginTitle");
       sidebarButtons.forEach(el => {
-        el.style.background = bgColor;
-        el.style.color = newColor;
+        el.style.background = buttonBg;
+        el.style.color = buttonColor;
         el.style.boxShadow = boxShadow;
       });
+
+      // Container arka plan
+      const container = document.querySelector(".container");
+      if (container) container.style.background = bgGradient;
+
+      // Login tab arka plan
+      const loginTab = document.getElementById("loginTab");
+      if (loginTab) loginTab.style.background = bgGradient;
     });
   }
 
