@@ -5,7 +5,7 @@
   const CONFIG = {
     const CONFIG = {
   PARTICLE_COUNT: 160,
-  PARTICLE_COLOR: "77,255,77", // yeşil renk
+  PARTICLE_COLOR: "0,255,0", // parlak yeşil
   MAX_DISTANCE: 150,
   MOUSE_RADIUS: 180,
   SPEED: 1.4,
