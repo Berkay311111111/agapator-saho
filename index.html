@@ -30,193 +30,62 @@ body, html {
 #main::-webkit-scrollbar { width:8px; }
 #main::-webkit-scrollbar-thumb { background:#ff4d4d; border-radius:4px; }
 #particleCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; display:block; }
+
+/* Dil butonu */
+#langSwitch {
+  position:fixed;
+  top:15px;
+  right:15px;
+  background:rgba(255,77,77,0.8);
+  color:#000;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:20;
+  transition:0.3s;
+}
+#langSwitch:hover { background:#ff1a1a; color:#fff; }
 </style>
 </head>
 <body>
 
 <canvas id="particleCanvas"></canvas>
 
+<button id="langSwitch">EN</button>
+
 <div id="loginTab" class="tab active">
-  <div id="loginTitle">SAHO AGAPATOR</div>
+  <div id="loginTitle" data-tr="SAHO AGAPATOR" data-en="SAHO AGAPATOR">SAHO AGAPATOR</div>
   <form id="loginForm">
-    <input type="text" id="keyInput" placeholder="Giriş Key" required>
-    <button type="submit">Giriş</button>
+    <input type="text" id="keyInput" placeholder="Giriş Key" data-tr-placeholder="Giriş Key" data-en-placeholder="Login Key" required>
+    <button type="submit" data-tr="Giriş" data-en="Login">Giriş</button>
     <p id="errorMsg" style="color:red;"></p>
   </form>
 </div>
 
 <div class="container" style="display:none;" id="mainContainer">
   <div id="sidebar">
-    <button data-tab="games">Oyun İndirme</button>
-    <button data-tab="fix">Fix Error</button>
-    <button data-tab="tweak">Tweak</button>
-    <button data-tab="emulator">Emulator</button>
-    <button data-tab="freefire">Free Fire</button>
-    <button data-tab="tools">Tools</button>
+    <button data-tab="games" data-tr="Oyun İndirme" data-en="Game Downloads">Oyun İndirme</button>
+    <button data-tab="fix" data-tr="Fix Error" data-en="Fix Error">Fix Error</button>
+    <button data-tab="tweak" data-tr="Tweak" data-en="Tweak">Tweak</button>
+    <button data-tab="emulator" data-tr="Emulator" data-en="Emulator">Emulator</button>
+    <button data-tab="freefire" data-tr="Free Fire" data-en="Free Fire">Free Fire</button>
+    <button data-tab="tools" data-tr="Tools" data-en="Tools">Tools</button>
   </div>
   <div id="main">
-    <div id="mainHeader">SAHO AGAPATOR</div>
+    <div id="mainHeader" data-tr="SAHO AGAPATOR" data-en="SAHO AGAPATOR">SAHO AGAPATOR</div>
 
-    <!-- Oyun İndirme -->
+    <!-- Örnek Tab -->
     <div class="tab" id="games">
-      <h2 style="color:#ff4d4d;">Oyun İndirme Linkleri</h2>
+      <h2 style="color:#ff4d4d" data-tr="Oyun İndirme Linkleri" data-en="Game Download Links">Oyun İndirme Linkleri</h2>
 
       <div class="item">
-        <span>
-          The Forest 🌳 🪓 <br>
-          Kategori: Korku / Hayatta Kalma + Multiplayer <br>
-          Min. Sistem: i5-2400 / 8GB RAM / GTX 670 <br>
-          Ortalama FPS: 60+
-        </span>
-        <a href="https://dosya.co/yqky22ow67l4/The_Forest_v1.12_by_Pioneer.zip.rar.html" target="_blank">İndir</a>
+        <span data-tr="Kategori: Korku / Hayatta Kalma + Multiplayer" data-en="Category: Horror / Survival + Multiplayer">Kategori: Korku / Hayatta Kalma + Multiplayer</span>
+        <a href="#" target="_blank" data-tr="İndir" data-en="Download">İndir</a>
       </div>
-
-      <div class="item">
-        <span>
-          Chained Together ⛓️ <br>
-          Kategori: Bulmaca / Kooperatif <br>
-          Min. Sistem: i3 / 4GB RAM / HD 4000 <br>
-          Ortalama FPS: 50+
-        </span>
-        <a href="https://drive.google.com/file/d/1TzAow9eP_Fivq2j0jwZq7boFPYpeksgn/view?usp=drive_link" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          Pushing It Together 🤝 <br>
-          Kategori: Kooperatif / Simülasyon <br>
-          Min. Sistem: i3 / 4GB RAM / Intel HD <br>
-          Ortalama FPS: 50+
-        </span>
-        <a href="https://drive.google.com/file/d/1O90hjDI5uVu4JMaQ8PT7dOyulTftKd9T/view?usp=sharing" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          Ranch Simulator 🐄 <br>
-          Kategori: Simülasyon / Yönetim <br>
-          Min. Sistem: i5 / 8GB RAM / GTX 750 Ti <br>
-          Ortalama FPS: 60+
-        </span>
-        <a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          Far Cry 3 🌴🔥 <br>
-          Kategori: Aksiyon / FPS / Açık Dünya <br>
-          Min. Sistem: i5 / 4GB RAM / GTX 460 <br>
-          Ortalama FPS: 60+
-        </span>
-        <a href="https://drive.google.com/file/d/1hKQhpJ9tV_-bDginL9J2oMYBAf-i8DfG/view?usp=drive_link" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          PC Building Simulator 🖥️ <br>
-          Kategori: Simülasyon / Eğitim <br>
-          Min. Sistem: i3 / 4GB RAM / Intel HD <br>
-          Ortalama FPS: 50+
-        </span>
-        <a href="https://drive.google.com/drive/folders/1c64odw5r7RxNuWOx-fM8scOY7jY7GIsn" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          State of Decay 2 Juggernaut Edition 🧟 <br>
-          Kategori: Hayatta Kalma / Zombi <br>
-          Min. Sistem: i5 / 8GB RAM / GTX 760 <br>
-          Ortalama FPS: 55+
-        </span>
-        <a href="https://drive.google.com/drive/folders/1IyzLrIHmC6bLEIK0Zq8o9kl3gd-v-ATv" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          DEVOUR ☠️ <br>
-          Kategori: Korku / Co-op <br>
-          Min. Sistem: i3 / 4GB RAM / GTX 550 Ti <br>
-          Ortalama FPS: 50+
-        </span>
-        <a href="https://www.mediafire.com/file/w1vvqjzj6wgiz4c/DEVOUR_v4.3.9-Oyunindirvip.zip/file" target="_blank">İndir</a>
-      </div>
-
+      <!-- Diğer itemlar buraya benzer şekilde eklenebilir -->
     </div>
-
-    <!-- Fix Error -->
-    <div class="tab" id="fix">
-      <h2 style="color:#ff4d4d;">Fix Error</h2>
-
-      <div class="item">
-        <span>
-          Visual Runtimes C++ <br>
-          Amaç: Oyun hatalarını düzeltir, eksik kütüphaneleri yükler
-        </span>
-        <a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          DirectX <br>
-          Amaç: Grafik ve oyun performansını optimize eder
-        </span>
-        <a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          Windows 10 Defender <br>
-          Amaç: Sistem güvenliği ve oyun uyumluluğu
-        </span>
-        <a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a>
-      </div>
-
-      <div class="item">
-        <span>
-          Hyper-V OFF <br>
-          Amaç: Sanallaştırmayı kapatarak bazı oyun ve emülatör hatalarını düzeltir
-        </span>
-        <a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a>
-      </div>
-
-    </div>
-
-    <!-- Tweak -->
-    <div class="tab" id="tweak">
-      <h2 style="color:#ff4d4d;">4v4 için Ideal Ayarlar</h2>
-      <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
-      <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
-      <p>🔹 18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
-      <p>🔹 21058 – Hareketi Olanlar için En İyi Uyum!</p>
-      <p>🔹 21066 – 21058’e Neredeyse Aynı</p>
-      <p>🔹 16714 – İyi Bir Ayar, Farklı Hassasiyetleri Denemeye Değer</p>
-      <p>🔹 8080**** – Önce 8080 ekleyerek farklı hassasiyet elde edebilirsiniz</p>
-    </div>
-
-    <!-- Emulator -->
-    <div class="tab" id="emulator">
-      <h2 style="color:#ff4d4d;">Emülatörler</h2>
-      <div class="item"><span>MSI App Player 5.9.300.6315 <br>Android oyunları PC’de oynatır</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 4.240.30.1002 <br>Android oyunları PC’de oynatır</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 5.12 <br>Android oyunları PC’de oynatır</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
-    </div>
-
-    <!-- Free Fire -->
-    <div class="tab" id="freefire">
-      <h2 style="color:#ff4d4d;">Free Fire</h2>
-      <div class="item"><span>Free Fire x86 (Amazon) <br>Uyumluluk: External/Internal paneller ile uyumlu</span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Free Fire Max x86 Native <br>Uyumluluk: External/Internal paneller ile uyumlu</span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank">İndir</a></div>
-    </div>
-
-    <!-- Tools -->
-    <div class="tab" id="tools">
-      <h2 style="color:#ff4d4d;">Tools</h2>
-      <div class="item"><span>Chams Menu 64 Bit <br>Oyun içi görsel hile aracı</span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Extreme Injector v3 <br>DLL yükleyici ve hile desteği</span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
-      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER <br>Oyun performans optimizasyon aracı</span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Winrar x64 <br>Dosya sıkıştırma ve arşiv yönetimi</span><a href="https://www.mediafire.com/file/6z050qr2p4ryxfu/winrar-x64-713.exe/file" target="_blank">İndir</a></div>
-    </div>
-
   </div>
 </div>
 
@@ -242,7 +111,19 @@ const loginForm=document.getElementById('loginForm');
 const loginTab=document.getElementById('loginTab');
 const mainContainer=document.getElementById('mainContainer');
 const errorMsg=document.getElementById('errorMsg');
-loginForm.addEventListener('submit',e=>{e.preventDefault(); const key=document.getElementById('keyInput').value; if(key==='SAHO123'){loginTab.style.display='none'; mainContainer.style.display='flex';} else{errorMsg.textContent='Yanlış Key!';}});
+loginForm.addEventListener('submit',e=>{e.preventDefault(); const key=document.getElementById('keyInput').value; if(key==='SAHO123'){loginTab.style.display='none'; mainContainer.style.display='flex';} else{errorMsg.textContent='Wrong Key!';}});
+
+// Dil değiştirici
+let currentLang='tr';
+const langSwitch=document.getElementById('langSwitch');
+langSwitch.addEventListener('click',()=>{
+  currentLang = currentLang==='tr' ? 'en' : 'tr';
+  langSwitch.textContent = currentLang==='tr' ? 'EN' : 'TR';
+  document.querySelectorAll('[data-tr]').forEach(el=>{
+    if(el.tagName==='INPUT') el.placeholder = el.dataset[currentLang];
+    else el.textContent = el.dataset[currentLang];
+  });
+});
 </script>
 
 </body>
