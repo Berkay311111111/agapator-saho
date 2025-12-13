@@ -73,6 +73,24 @@ body, html {
   padding:10px 0;
   z-index:10;
 }
+#colorToggleBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  background: #ff4d4d; /* Başlangıç kırmızı */
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 999;
+  box-shadow: 0 0 10px #ff4d4d;
+  transition: 0.3s;
+}
+#colorToggleBtn:hover {
+  box-shadow: 0 0 20px currentColor;
+}
 
 #langSwitch {
   position:absolute;
@@ -187,6 +205,8 @@ body, html {
     <button data-tab="freefire">Free Fire</button>
     <button data-tab="tools">Tools</button>
     <button onclick="window.location.href='codeConverter.html'">Code Converter</button>
+    <button id="colorToggleBtn">Renk Değiştir</button>
+
   </div>
 
   <div id="main">
@@ -288,6 +308,46 @@ function activateTab(id){
 document.querySelectorAll('#sidebar button[data-tab]')
 .forEach(b=>b.onclick=()=>activateTab(b.dataset.tab));
 </script>
+const colorToggleBtn = document.getElementById('colorToggleBtn');
+let isRed = true;
+
+colorToggleBtn.addEventListener('click', () => {
+  isRed = !isRed; // Toggle durumu
+
+  const mainColor = isRed ? '#ff4d4d' : 'rgb(0,255,0)';
+  const textShadowColor = isRed ? 'rgba(255,77,77,0.8)' : 'rgba(0,255,0,0.8)';
+
+  // Ana başlık ve login başlığı
+  document.getElementById('mainHeader').style.color = mainColor;
+  document.getElementById('mainHeader').style.textShadow = `0 0 12px ${textShadowColor}`;
+
+  document.getElementById('loginTitle').style.color = mainColor;
+  document.getElementById('loginTitle').style.textShadow = `0 0 12px ${textShadowColor}`;
+
+  // Sidebar butonları
+  document.querySelectorAll('#sidebar button').forEach(btn => {
+    btn.style.color = mainColor;
+    btn.style.boxShadow = `0 0 5px ${mainColor}`;
+    btn.style.background = `rgba(${isRed ? '20,0,0' : '0,20,0'},0.7)`;
+  });
+
+  // Tab başlıkları
+  document.querySelectorAll('.tab h2').forEach(h2 => {
+    h2.style.color = mainColor;
+  });
+
+  // Item box-shadow ve a linkler
+  document.querySelectorAll('.item').forEach(item => {
+    item.style.boxShadow = `0 0 8px ${mainColor}`;
+  });
+  document.querySelectorAll('.item a').forEach(a => {
+    a.style.color = mainColor;
+    a.style.background = '#222';
+  });
+
+  // Buton rengi kendisi
+  colorToggleBtn.style.background = mainColor;
+});
 
 
 <script src="customParticles.js"></script>
