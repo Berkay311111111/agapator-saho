@@ -4,41 +4,45 @@
 <meta charset="UTF-8">
 <title>Code Converter</title>
 <style>
-body {
+html, body {
   margin:0;
   padding:0;
   font-family:'Segoe UI', sans-serif;
   background:#0d0d0d;
   color:#fff;
+  height:100%;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
 }
 
 #converterContainer {
   background:#1a1a1a;
-  padding:30px 40px;
+  padding:40px 50px;
   border-radius:12px;
   text-align:center;
-  box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+  box-shadow: 0 0 30px rgba(255, 77, 77, 0.6);
+  width: 90%;
+  max-width: 800px;
 }
 
 h1 {
   color:#ff4d4d;
-  margin-bottom:25px;
+  margin-bottom:30px;
+  font-size:36px;
 }
 
 input, select, button {
-  padding:10px 15px;
+  padding:15px 20px;
   margin:10px 0;
-  border-radius:6px;
+  border-radius:8px;
   border:none;
-  font-size:16px;
+  font-size:18px;
 }
 
 input, select {
-  width:200px;
+  width:80%;
+  max-width:400px;
 }
 
 button {
@@ -47,13 +51,21 @@ button {
   cursor:pointer;
   font-weight:bold;
   width:220px;
+  margin-top:10px;
 }
 
 #result {
-  margin-top:20px;
-  font-size:18px;
+  margin-top:25px;
+  font-size:20px;
   font-weight:bold;
   color:#00ff99;
+  word-wrap: break-word;
+}
+
+#copyBtn {
+  margin-top:15px;
+  background:#00ff99;
+  color:#000;
 }
 </style>
 </head>
@@ -62,7 +74,7 @@ button {
 <div id="converterContainer">
   <h1>Code Converter</h1>
   
-  <input type="text" id="inputValue" placeholder="Sayı girin">
+  <input type="text" id="inputValue" placeholder="Sayıları girin (örn: FF FF FF veya 255 128)">
   <br>
   <select id="conversionType">
     <option value="hexToDec">Hex → Decimal</option>
@@ -70,36 +82,59 @@ button {
   </select>
   <br>
   <button onclick="convert()">Dönüştür</button>
+  <button id="copyBtn" onclick="copyResult()">Sonucu Kopyala</button>
   
   <div id="result"></div>
 </div>
 
 <script>
 function convert(){
-  const value = document.getElementById('inputValue').value.trim();
+  const input = document.getElementById('inputValue').value.trim();
   const type = document.getElementById('conversionType').value;
   const resultDiv = document.getElementById('result');
 
-  if(value === ''){
+  if(input === ''){
     resultDiv.textContent = 'Lütfen bir değer girin!';
     return;
   }
 
+  // Boşluk veya virgülle ayırıyoruz
+  const values = input.split(/[\s,]+/);
+  let results = [];
+
   if(type === 'hexToDec'){
-    const decimal = parseInt(value, 16);
-    if(isNaN(decimal)){
-      resultDiv.textContent = 'Geçersiz Hex değeri!';
-    } else {
-      resultDiv.textContent = `Decimal: ${decimal}`;
-    }
+    values.forEach(v => {
+      const decimal = parseInt(v, 16);
+      if(isNaN(decimal)){
+        results.push(`${v} → Geçersiz Hex`);
+      } else {
+        results.push(decimal);
+      }
+    });
   } else if(type === 'decToHex'){
-    const num = parseInt(value, 10);
-    if(isNaN(num)){
-      resultDiv.textContent = 'Geçersiz Decimal değeri!';
-    } else {
-      resultDiv.textContent = `Hex: ${num.toString(16).toUpperCase()}`;
-    }
+    values.forEach(v => {
+      const num = parseInt(v, 10);
+      if(isNaN(num)){
+        results.push(`${v} → Geçersiz Decimal`);
+      } else {
+        results.push(num.toString(16).toUpperCase());
+      }
+    });
   }
+
+  resultDiv.textContent = results.join(' ');
+}
+
+// Kopyalama fonksiyonu
+function copyResult(){
+  const resultDiv = document.getElementById('result');
+  if(resultDiv.textContent.trim() === ''){
+    alert('Kopyalanacak bir sonuç yok!');
+    return;
+  }
+  navigator.clipboard.writeText(resultDiv.textContent)
+    .then(() => alert('Sonuç kopyalandı!'))
+    .catch(() => alert('Kopyalama başarısız!'));
 }
 </script>
 
