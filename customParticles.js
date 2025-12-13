@@ -73,7 +73,8 @@
     }
 
     draw() {
-      ctx.fillStyle = `rgb(${CONFIG.PARTICLE_COLOR})`;
+      // Doğrudan RGB string kullanıyoruz
+      ctx.fillStyle = "rgb(0,255,0)";
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
       ctx.fill();
@@ -99,7 +100,7 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONFIG.MAX_DISTANCE) {
-          ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR},${1 - dist / CONFIG.MAX_DISTANCE})`;
+          ctx.strokeStyle = `rgba(0,255,0,${1 - dist / CONFIG.MAX_DISTANCE})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -119,7 +120,7 @@
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < CONFIG.MOUSE_RADIUS) {
-        ctx.strokeStyle = `rgba(${CONFIG.PARTICLE_COLOR},${1 - dist / CONFIG.MOUSE_RADIUS})`;
+        ctx.strokeStyle = `rgba(0,255,0,${1 - dist / CONFIG.MOUSE_RADIUS})`;
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
