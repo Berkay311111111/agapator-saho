@@ -62,8 +62,7 @@ body, html {
 <div id="loginTab" class="tab active">
   <div id="loginTitle">SAHO AGAPATOR</div>
   <form id="loginForm">
-    <input type="text" id="username" placeholder="Kullanıcı Adı" required>
-    <input type="password" id="password" placeholder="Key" required>
+    <input type="text" id="keyInput" placeholder="Giriş Key" required>
     <button type="submit">Giriş</button>
     <p id="errorMsg" style="color:red;"></p>
   </form>
@@ -90,7 +89,51 @@ body, html {
       <div class="item"><span>Ranch Simulator 🐄</span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank">İndir</a></div>
       <div class="item"><span>Soon..</span><a href="#" target="_blank">İndir</a></div>
     </div>
-    <!-- Diğer sekmeler benzer şekilde eklenebilir -->
+
+    <!-- Fix Error -->
+    <div class="tab" id="fix">
+      <h2 style="color:#ff4d4d;">Fix Error</h2>
+      <div class="item"><span>Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Hyper-V OFF</span><a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Tweak -->
+    <div class="tab" id="tweak">
+      <h2 style="color:#ff4d4d;">4v4 için Ideal Ayarlar</h2>
+      <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
+      <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
+      <p>🔹 18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
+      <p>🔹 21058 – Hareketi Olanlar için En İyi Uyum!</p>
+      <p>🔹 21066 – 21058’e Neredeyse Aynı</p>
+      <p>🔹 16714 – İyi Bir Ayar, Farklı Hassasiyetleri Denemeye Değer</p>
+      <p>🔹 8080**** – Önce 8080 ekleyerek farklı hassasiyet elde edebilirsiniz</p>
+    </div>
+
+    <!-- Emulator -->
+    <div class="tab" id="emulator">
+      <h2 style="color:#ff4d4d;">Emülatörler</h2>
+      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Free Fire -->
+    <div class="tab" id="freefire">
+      <h2 style="color:#ff4d4d;">Free Fire</h2>
+      <div class="item"><span>Free Fire x86 (Amazon) </span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Free Fire Max x86 Native</span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank">İndir</a></div>
+    </div>
+
+    <!-- Tools -->
+    <div class="tab" id="tools">
+      <h2 style="color:#ff4d4d;">Tools</h2>
+      <div class="item"><span>Chams Menu 64 Bit</span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
+      <div class="item"><span>Extreme Injector v3</span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
+      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER</span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
+    </div>
+
   </div>
 </div>
 
@@ -120,23 +163,20 @@ tabButtons.forEach(btn => {
   });
 });
 
-// Login sistemi - key mantığı
-const users = ['npc','reco','umeyir','savas','saho']; // key = kullanıcı + 117
+// Login sistemi - tek key
+const validKeys = ['npc117','reco117','umeyir117','savas117','saho117']; // tüm kullanıcı keyleri
 const loginForm = document.getElementById('loginForm');
-const usernameInput = document.getElementById('username');
-const passwordInput = document.getElementById('password');
+const keyInput = document.getElementById('keyInput');
 
 loginForm.addEventListener('submit', e=>{
   e.preventDefault();
-  const user = usernameInput.value.trim().toLowerCase();
-  const key = passwordInput.value.trim();
-  const valid = users.find(u => (u+ '117').toLowerCase() === key.toLowerCase());
-  if(valid && user.toLowerCase()===valid.toLowerCase()){
+  const key = keyInput.value.trim().toLowerCase();
+  if(validKeys.find(k=>k.toLowerCase()===key)){
     document.getElementById('loginTab').style.display='none';
     document.getElementById('mainContainer').style.display='flex';
     tabs[0].classList.add('active');
   } else {
-    document.getElementById('errorMsg').innerText='Kullanıcı veya Key hatalı';
+    document.getElementById('errorMsg').innerText='Key hatalı';
   }
 });
 </script>
