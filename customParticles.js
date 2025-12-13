@@ -4,7 +4,7 @@
   /* ================= CONFIG ================= */
   const CONFIG = {
     PARTICLE_COUNT: 160,            // Particle sayısı
-    PARTICLE_COLOR: "255,255",  // Beyaz renk
+    PARTICLE_COLOR: "255,77,77",  // Beyaz renk
     MAX_DISTANCE: 150,              // Particle'lar arası max çizgi mesafesi
     MOUSE_RADIUS: 180,              // Mouse radius
     SPEED: 2.4,                     // Hız
