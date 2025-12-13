@@ -180,14 +180,14 @@ body, html {
 </div>
 
 <div class="container" id="mainContainer" style="display:none;">
-  <div id="sidebar">
-    <button data-tab="games">Oyun İndirme</button>
-    <button data-tab="fix">Fix Error</button>
-    <button data-tab="tweak">Tweaks</button>
-    <button data-tab="emulator">Emulator</button>
-    <button data-tab="freefire">Free Fire</button>
-    <button data-tab="tools">Tools</button>
-    <button data-tab="codeConverter">Code Converter</button>
+ <div id="sidebar">
+  <button data-tab="games">Oyun İndirme</button>
+  <button data-tab="fix">Fix Error</button>
+  <button data-tab="tweak">Tweaks</button>
+  <button data-tab="emulator">Emulator</button>
+  <button data-tab="freefire">Free Fire</button>
+  <button data-tab="tools">Tools</button>
+  <button onclick="window.location.href='codeConverter.html'">Code Converter</button>
   </div>
 
   <div id="main">
@@ -279,13 +279,7 @@ body, html {
       <div class="item"><span>Winrar x64</span><a href="https://www.mediafire.com/file/6z050qr2p4ryxfu/winrar-x64-713.exe/file" target="_blank">İndir</a></div>
     </div>
 
-    <!-- CODE CONVERTER -->
-    <div class="tab" id="codeConverter">
-      <h2 style="color:#ff4d4d;">Code Converter</h2>
-      <textarea id="converterInput" placeholder="Buraya kodu yapıştır..." style="width:100%;height:150px;margin-bottom:10px;background:#222;color:#ff4d4d;border:none;padding:10px;border-radius:6px;"></textarea>
-      <button id="convertBtn" style="padding:12px;background:#ff4d4d;color:#000;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">Çevir</button>
-      <pre id="converterOutput" style="background:#111;color:#ff4d4d;padding:10px;border-radius:6px;margin-top:10px;min-height:100px;"></pre>
-    </div>
+   
 
   </div>
 </div>
