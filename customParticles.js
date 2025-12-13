@@ -4,10 +4,10 @@
   /* ================= CONFIG ================= */
   const CONFIG = {
     PARTICLE_COUNT: 160,
-    PARTICLE_COLOR: "255,77,77",
+    PARTICLE_COLOR: "255, 255, 255",
     MAX_DISTANCE: 150,
     MOUSE_RADIUS: 180,
-    SPEED: 1.4,
+    SPEED: 2.4,
     BACKGROUND_CLEAR: true
   };
 
