@@ -4,21 +4,19 @@
 <meta charset="UTF-8">
 <title>AGAPATOR SAHO</title>
 <style>
-/* Genel stil */
 body, html {
   margin:0; padding:0; height:100%; font-family: 'Segoe UI', sans-serif; background:#0d0d0d; color:#fff;
   overflow:hidden;
 }
 
-/* Gradient background ve glow efektleri kırmızı tema */
+/* Container ve sol sidebar */
 .container { display:flex; height:100%; background: linear-gradient(120deg, #2c0a0a, #5c1a1a, #3e0f0f); }
 #sidebar { width:220px; background:rgba(0,0,0,0.8); padding:20px; box-sizing:border-box; display:flex; flex-direction:column; }
 #sidebar button { margin:10px 0; padding:12px; background:rgba(20,0,0,0.7); border:none; color:#ff4d4d; cursor:pointer; border-radius:8px; transition:0.3s; text-align:left; font-weight:bold; box-shadow:0 0 5px #ff4d4d; }
 #sidebar button:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
 
+/* Ana içerik */
 #main { flex:1; padding:20px; box-sizing:border-box; overflow-y:auto; position:relative; }
-
-/* Sabit başlık */
 #mainHeader {
   font-size:48px;
   font-weight:bold;
@@ -33,61 +31,45 @@ body, html {
   background:none;
 }
 
-/* Tab ve içerik */
+/* Sekmeler ve animasyon */
 .tab { display:none; opacity:0; transform:translateY(20px); transition:0.4s ease; }
 .tab.active { display:block; opacity:1; transform:translateY(0); }
 
-/* Login stil */
-#loginTab { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; }
-#loginTitle {
-  font-size:48px; 
-  font-weight:bold; 
-  color:#ff4d4d; 
-  text-align:center; 
-  margin-bottom:30px; 
-  text-shadow: 0 0 12px rgba(255,77,77,0.8);
-}
+/* Login ekranı */
+#loginTab { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; z-index:5; position:relative; }
+#loginTitle { font-size:48px; font-weight:bold; color:#ff4d4d; text-align:center; margin-bottom:30px; text-shadow: 0 0 12px rgba(255,77,77,0.8); }
 #loginForm { display:flex; flex-direction:column; max-width:350px; width:100%; }
-#loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; }
-#loginForm input[type="password"] { color:red; font-weight:bold; }
+#loginForm input { margin:10px 0; padding:12px; border-radius:6px; border:none; font-size:16px; color:red; font-weight:bold; }
 #loginForm button { padding:12px; border:none; border-radius:6px; background:#ff4d4d; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
 #loginForm button:hover { background:#ff8080; }
-#loginForm label { color:#ff4d4d; font-weight:bold; margin-top:5px; }
+#loginForm label { display:none; } /* Beni hatırla kaldırıldı */
 
-/* İçerik satırları */
 .item { display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:10px; background:rgba(0,0,0,0.5); border-radius:8px; box-shadow:0 0 8px #ff4d4d; transition:0.3s; }
 .item:hover { background:rgba(0,0,0,0.7); box-shadow:0 0 15px #ff4d4d; }
 .item a { padding:8px 15px; border-radius:6px; background:#222; color:#ff4d4d; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 5px #ff4d4d; }
 .item a:hover { background:#ff4d4d; color:#000; box-shadow:0 0 15px #ff4d4d; }
 
-/* Scroll bar */
 #main::-webkit-scrollbar { width:8px; }
 #main::-webkit-scrollbar-thumb { background:#ff4d4d; border-radius:4px; }
 
-/* Particle canvas */
 #particles-js { position:fixed; width:100%; height:100%; top:0; left:0; z-index:-1; }
 </style>
 </head>
 <body>
 
-<!-- Particle canvas -->
 <div id="particles-js"></div>
 
-<!-- Login ekranı -->
 <div id="loginTab" class="tab active">
   <div id="loginTitle">SAHO AGAPATOR</div>
   <form id="loginForm">
     <input type="text" id="username" placeholder="Kullanıcı Adı" required>
-    <input type="password" id="password" placeholder="Şifre" required>
-    <label><input type="checkbox" id="rememberMe"> Beni Hatırla</label>
+    <input type="password" id="password" placeholder="Key" required>
     <button type="submit">Giriş</button>
     <p id="errorMsg" style="color:red;"></p>
   </form>
 </div>
 
-<!-- Ana içerik -->
 <div class="container" style="display:none;" id="mainContainer">
-  <!-- Sol panel -->
   <div id="sidebar">
     <button data-tab="games">Oyun İndirme</button>
     <button data-tab="fix">Fix Error</button>
@@ -96,8 +78,6 @@ body, html {
     <button data-tab="freefire">Free Fire</button>
     <button data-tab="tools">Tools</button>
   </div>
-
-  <!-- Sağ içerik -->
   <div id="main">
     <div id="mainHeader">SAHO AGAPATOR</div>
 
@@ -110,57 +90,13 @@ body, html {
       <div class="item"><span>Ranch Simulator 🐄</span><a href="https://drive.google.com/file/d/1zn6_SpynXUUL4qh9Ym8WVt8N2ytJq2SB/view?usp=sharing" target="_blank">İndir</a></div>
       <div class="item"><span>Soon..</span><a href="#" target="_blank">İndir</a></div>
     </div>
-
-    <!-- Fix Error -->
-    <div class="tab" id="fix">
-      <h2 style="color:#ff4d4d;">Fix Error</h2>
-      <div class="item"><span>Visual Runtimes C++</span><a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Windows 10 Defender</span><a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a></div>
-      <div class="item"><span>DirectX</span><a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Hyper-V OFF</span><a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a></div>
-    </div>
-
-    <!-- Tweak -->
-    <div class="tab" id="tweak">
-      <h2 style="color:#ff4d4d;">4v4 için Ideal Ayarlar</h2>
-      <p>🔹 16450 – Varsayılan (EMÜLATÖR)</p>
-      <p>🔹 16458 – Standart Ayar Yeni Versiyon</p>
-      <p>🔹 18514 – Bence 4v4 için En İyi Uyum! Neredeyse Hiç Hata Yok!</p>
-      <p>🔹 21058 – Hareketi Olanlar için En İyi Uyum!</p>
-      <p>🔹 21066 – 21058’e Neredeyse Aynı</p>
-      <p>🔹 16714 – İyi Bir Ayar, Farklı Hassasiyetleri Denemeye Değer</p>
-      <p>🔹 8080**** – Önce 8080 ekleyerek farklı hassasiyet elde edebilirsiniz</p>
-    </div>
-
-    <!-- Emulator -->
-    <div class="tab" id="emulator">
-      <h2 style="color:#ff4d4d;">Emülatörler</h2>
-      <div class="item"><span>MSI App Player 5.9.300.6315</span><a href="https://www.mediafire.com/file/anikafhe0cnr9so/MSI+5.9.300.6315.exe/file" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 4.240.30.1002</span><a href="https://www.mediafire.com/file/0aywnzykhdp8w9a/BlueStacks_App_Player_v4.240.30.1002.rar/file" target="_blank">İndir</a></div>
-      <div class="item"><span>BlueStacks App Player 5.12</span><a href="https://www.mediafire.com/file/aanwibvaluqaai5/BlueStacks+5.12.rar/file" target="_blank">İndir</a></div>
-    </div>
-
-    <!-- Free Fire -->
-    <div class="tab" id="freefire">
-      <h2 style="color:#ff4d4d;">Free Fire</h2>
-      <div class="item"><span>Free Fire x86 (Amazon) </span><a href="https://www.mediafire.com/file/1z43wrcptteam2f/Free_Fire_1.118.1_APKPure.xapk/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Free Fire Max x86 Native</span><a href="https://www.mediafire.com/file/q4996d4t30lgip0/FF_MAX_X86_OB51_7FARFF.xapk/file" target="_blank">İndir</a></div>
-    </div>
-
-    <!-- Tools -->
-    <div class="tab" id="tools">
-      <h2 style="color:#ff4d4d;">Tools</h2>
-      <div class="item"><span>Chams Menu 64 Bit</span><a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a></div>
-      <div class="item"><span>Extreme Injector v3</span><a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a></div>
-      <div class="item"><span>SAHO CHEATS ORGINAL OPTIMIZER</span><a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a></div>
-    </div>
-
+    <!-- Diğer sekmeler benzer şekilde eklenebilir -->
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-// Particle.js kırmızı tema
+// Particles.js
 particlesJS("particles-js", {
   "particles": {
     "number": {"value":120},
@@ -184,45 +120,25 @@ tabButtons.forEach(btn => {
   });
 });
 
-// Login sistemi case-insensitive ve şifre = kullanıcıadı1
-const users = ['npc','reco','umeyir','savas','saho'];
+// Login sistemi - key mantığı
+const users = ['npc','reco','umeyir','savas','saho']; // key = kullanıcı + 117
 const loginForm = document.getElementById('loginForm');
-const rememberCheckbox = document.getElementById('rememberMe');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
-
-window.addEventListener('load', () => {
-  const savedUser = localStorage.getItem('savedUser');
-  const savedPass = localStorage.getItem('savedPass');
-  if(savedUser && savedPass){
-    login(savedUser, savedPass);
-  }
-});
 
 loginForm.addEventListener('submit', e=>{
   e.preventDefault();
   const user = usernameInput.value.trim().toLowerCase();
-  const pass = passwordInput.value.trim();
-  login(user, pass);
-});
-
-function login(user, pass){
-  const valid = users.find(u=>u.toLowerCase()===user);
-  if(valid && pass===valid+'1'){
+  const key = passwordInput.value.trim();
+  const valid = users.find(u => (u+ '117').toLowerCase() === key.toLowerCase());
+  if(valid && user.toLowerCase()===valid.toLowerCase()){
     document.getElementById('loginTab').style.display='none';
     document.getElementById('mainContainer').style.display='flex';
     tabs[0].classList.add('active');
-    if(rememberCheckbox.checked){
-      localStorage.setItem('savedUser', user);
-      localStorage.setItem('savedPass', pass);
-    } else {
-      localStorage.removeItem('savedUser');
-      localStorage.removeItem('savedPass');
-    }
-  } else{
-    document.getElementById('errorMsg').innerText='Kullanıcı adı veya şifre hatalı';
+  } else {
+    document.getElementById('errorMsg').innerText='Kullanıcı veya Key hatalı';
   }
-}
+});
 </script>
 
 </body>
