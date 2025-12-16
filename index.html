@@ -182,7 +182,7 @@ body, html {
 
 <!-- LOGIN -->
 <div id="loginTab" class="tab active">
-  <div id="loginTitle">SAHO AGAPATOR</div>
+  <div id="loginTitle">SAHO AGAPATOR V3</div>
   <form id="loginForm">
     <input type="text" id="keyInput" placeholder="Giriş Key" required>
     <button type="submit">Giriş</button>
@@ -203,7 +203,7 @@ body, html {
   </div>
 
   <div id="main">
-    <div id="mainHeader">SAHO AGAPATOR</div>
+    <div id="mainHeader">SAHO AGAPATOR V3</div>
 <!-- OYUNLAR -->
 <div class="tab" id="games">
   <h2>🎮 Oyun İndirme Merkezi</h2>
@@ -214,7 +214,7 @@ body, html {
   <div class="item">
     <span><b>GTA V</b> 🌆<br>
       Tür: Aksiyon / Açık Dünya<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | GTX 1060
     </span>
@@ -224,7 +224,7 @@ body, html {
   <div class="item">
     <span><b>GTA V Enhanced</b> 🌆✨<br>
       Tür: Aksiyon / Açık Dünya<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | RTX 2060
     </span>
@@ -244,7 +244,7 @@ body, html {
   <div class="item">
     <span><b>Sons Of The Forest</b> 🌲☠️<br>
       Tür: Korku / Hayatta Kalma<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | RTX 2060
     </span>
@@ -256,7 +256,7 @@ body, html {
 
   <div class="item">
     <span><b>Outlast 2</b> 👁️<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | GTX 1060
     </span>
@@ -274,7 +274,7 @@ body, html {
 
   <div class="item">
     <span><b>Resident Evil 2</b> 🧟‍♂️<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | GTX 1060
     </span>
@@ -283,7 +283,7 @@ body, html {
 
   <div class="item">
     <span><b>The Last of Us</b> 🧠<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 750<br>
       Önerilen: i7 | 16GB | RTX 2060
     </span>
@@ -346,7 +346,7 @@ body, html {
 
   <div class="item">
     <span><b>Ranch Simulator</b> 🐄<br>
-      Multiplayer: Hayır<br>
+      Multiplayer: Evet<br>
       Min: i5 | 8GB | GTX 650<br>
       Önerilen: i7 | 16GB | GTX 1060
     </span>
@@ -387,9 +387,44 @@ body, html {
 </div>
 
 
-    <!-- FIX -->
   <div class="tab" id="fix">
   <h2>Fix Error</h2>
+
+  <style>
+    /* item içerisindeki indirme butonunu sağa yasla */
+    #fix .item {
+      display: flex;
+      justify-content: space-between; /* metin solda, buton sağda */
+      align-items: center; /* dikey ortalama */
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #fix .item span {
+      flex: 1; /* metin alanını genişlet */
+    }
+
+    #fix .item a {
+      flex: 0; /* linkin kendi boyutunda kalmasını sağlar */
+      text-decoration: none;
+      background-color: #007bff;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    #fix .item a:hover {
+      background-color: #0056b3;
+    }
+
+    #fix .item p {
+      margin: 5px 0 0 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 
   <!-- Sistem Araçları -->
   <h3>Sistem Araçları</h3>
@@ -466,6 +501,7 @@ body, html {
     <p>Wi-Fi ve internet bağlantı sorunlarını otomatik olarak çözer.</p>
   </div>
 </div>
+
 
 
     <!-- TWEAK -->
