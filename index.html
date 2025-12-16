@@ -68,10 +68,10 @@ body, html {
   text-align:center;
   margin-bottom:30px;
   text-shadow: 0 0 12px rgba(180,0,255,0.9);
-  position:sticky;
-  top:0;
+  position: relative; /* sticky yerine relative yaptık */
+  top: auto; /* top değerini kaldır */
   padding:10px 0;
-  z-index:10;
+  z-index:1; /* diğer içeriklerin üstüne çıkmaması için z-index küçültüldü */
   transition: color 0.5s, text-shadow 0.5s;
 }
 
@@ -386,85 +386,100 @@ body, html {
   </div>
 </div>
 
+<!-- FIX TAB -->
+<div class="tab" id="fix">
+  <h2>🛠️ Fix & Sistem Araçları</h2>
 
-    <!-- FIX -->
-  <div class="tab" id="fix">
-  <h2>Fix Error</h2>
-
-  <!-- Sistem Araçları -->
-  <h3>Sistem Araçları</h3>
+  <!-- Sanallaştırma -->
+  <h3>Sanallaştırma</h3>
   <div class="item">
-    <span>Visual Runtimes C++</span>
-    <a href="https://www.mediafire.com/file/w8devda8d0kikhr/Visual-C-Runtimes-All-in-One-Dec-2025.zip/file" target="_blank">İndir</a>
-    <p>Kod çalıştırırken eksik olan C++ kütüphanelerini yükler ve uygulama hatalarını çözer.</p>
-  </div>
-  <div class="item">
-    <span>DirectX</span>
-    <a href="https://www.mediafire.com/file/tlo2npegjqcn8el/dxwebsetup.exe/file" target="_blank">İndir</a>
-    <p>Oyunlar ve grafik uygulamaları için gerekli DirectX kütüphanelerini günceller.</p>
-  </div>
-  <div class="item">
-    <span>Hyper-V OFF</span>
+    <span>
+      <b>Hyper-V OFF</b><br>
+      Hyper-V’yi kapatarak sanal makine ve oyun uyumluluğu sorunlarını çözer.
+    </span>
     <a href="https://www.mediafire.com/file/k5bk0zsyrssg4ki/OFF_Hyper-V_original_1+(1).exe/file" target="_blank">İndir</a>
-    <p>Hyper-V’yi kapatarak sanal makine ve oyun uyumluluğu sorunlarını çözer.</p>
   </div>
 
   <!-- Güvenlik Araçları -->
   <h3>Güvenlik Araçları</h3>
   <div class="item">
-    <span>Windows 10 Defender</span>
+    <span>
+      <b>Windows 10 Defender</b><br>
+      Windows Defender’i yeniden yükleyerek virüs ve malware taramasını sağlar.
+    </span>
     <a href="https://www.mediafire.com/file/c6iutk47i9xp563/SAHO+DEFENDER.rar/file" target="_blank">İndir</a>
-    <p>Windows Defender’i yeniden yükleyerek virüs ve malware taramasını sağlar.</p>
   </div>
+
   <div class="item">
-    <span>Malwarebytes Free</span>
+    <span>
+      <b>Malwarebytes Free</b><br>
+      Bilgisayarını virüs ve reklam yazılımlarına karşı tarar ve temizler.
+    </span>
     <a href="https://www.malwarebytes.com/mwb-download/" target="_blank">İndir</a>
-    <p>Bilgisayarını virüs ve reklam yazılımlarına karşı tarar ve temizler.</p>
   </div>
 
   <!-- Donanım ve Sürücü Araçları -->
   <h3>Donanım ve Sürücü Araçları</h3>
   <div class="item">
-    <span>Driver Booster Pro</span>
+    <span>
+      <b>Driver Booster Pro</b><br>
+      Eksik veya eski sürücüleri güncelleyerek sistem stabilitesini artırır.
+    </span>
     <a href="https://www.mediafire.com/file/beu7sk5gpw572yl/SAHO+PRO.rar/file" target="_blank">İndir</a>
-    <p>Eksik veya eski sürücüleri güncelleyerek sistem stabilitesini artırır.</p>
   </div>
+
   <div class="item">
-    <span>NVIDIA v11.0.5.420</span>
+    <span>
+      <b>NVIDIA v11.0.5.420</b><br>
+      NVIDIA ekran kartı sürücüsünü güncelleyerek oyun ve grafik performansını artırır.
+    </span>
     <a href="https://uk.download.nvidia.com/nvapp/client/11.0.5.420/NVIDIA_app_v11.0.5.420.exe" target="_blank">İndir</a>
-    <p>NVIDIA ekran kartı sürücüsünü güncelleyerek oyun ve grafik performansını artırır.</p>
   </div>
+
   <div class="item">
-    <span>CPU-Z</span>
+    <span>
+      <b>CPU-Z</b><br>
+      İşlemci, RAM ve anakart bilgilerini göstererek sistem analizi yapar.
+    </span>
     <a href="https://www.cpuid.com/softwares/cpu-z.html" target="_blank">İndir</a>
-    <p>İşlemci, RAM ve anakart bilgilerini göstererek sistem analizi yapar.</p>
   </div>
+
   <div class="item">
-    <span>GPU-Z</span>
+    <span>
+      <b>GPU-Z</b><br>
+      Ekran kartının detaylı bilgilerini ve sıcaklık durumunu gösterir.
+    </span>
     <a href="https://www.techpowerup.com/gpuz/" target="_blank">İndir</a>
-    <p>Ekran kartının detaylı bilgilerini ve sıcaklık durumunu gösterir.</p>
   </div>
 
   <!-- Temizlik ve Performans Araçları -->
   <h3>Temizlik ve Performans</h3>
   <div class="item">
-    <span>CCleaner</span>
+    <span>
+      <b>CCleaner</b><br>
+      Geçici dosyaları temizler ve kayıt defteri hatalarını onarır.
+    </span>
     <a href="https://www.ccleaner.com/ccleaner/download" target="_blank">İndir</a>
-    <p>Geçici dosyaları temizler ve kayıt defteri hatalarını onarır.</p>
   </div>
+
   <div class="item">
-    <span>Unlocker</span>
+    <span>
+      <b>Unlocker</b><br>
+      Silinemeyen dosya veya klasörleri kaldırmanızı sağlar.
+    </span>
     <a href="https://www.mediafire.com/file/7qiko7d707tf7od/unlocker-setup.exe/file" target="_blank">İndir</a>
-    <p>Silinemeyen dosya veya klasörleri kaldırmanızı sağlar.</p>
   </div>
 
   <!-- Ağ ve İnternet Araçları -->
   <h3>Ağ ve İnternet</h3>
   <div class="item">
-    <span>Wi-Fi Repair Tool</span>
+    <span>
+      <b>Wi-Fi Repair Tool</b><br>
+      Wi-Fi ve internet bağlantı sorunlarını otomatik olarak çözer.
+    </span>
     <a href="https://www.softpedia.com/get/Network-Tools/Wireless-Tools/WiFi-Repair-Tool.shtml" target="_blank">İndir</a>
-    <p>Wi-Fi ve internet bağlantı sorunlarını otomatik olarak çözer.</p>
   </div>
+
 </div>
 
 
@@ -682,51 +697,48 @@ body, html {
 
 
 <div class="tab" id="tools">
-  <h2>Tools</h2>
+  <h2>🛠️ Tools</h2>
 
-  <!-- CHAMS & INJECTOR -->
+  <!-- Cheat Araçları -->
   <h3>Cheat Araçları</h3>
   <div class="item">
     <span>
-      Chams Menu 64 Bit <br>
-      <small>External ve Internal panellerle uyumlu</small>
+      <b>Chams Menu 64 Bit</b><br>
+      External ve Internal panellerle uyumlu<br>
+      Oyuncuları ve nesneleri renkli göstererek duvar arkasından görme imkânı sağlar (Wallhack tipi). Internal veya External panellerle çalışır.
     </span>
     <a href="https://www.mediafire.com/file/3d8t2o9i68z0arc/opengl32.zip/file" target="_blank">İndir</a>
-    <p>Oyuncuları ve nesneleri renkli göstererek duvar arkasından görme imkânı sağlar (Wallhack tipi). Internal veya External panellerle çalışır.</p>
   </div>
 
   <div class="item">
     <span>
-      Extreme Injector v3 <br>
-      <small>External ve Internal panellerle uyumlu</small>
+      <b>Extreme Injector v3</b><br>
+      External ve Internal panellerle uyumlu<br>
+      DLL dosyalarını oyun veya uygulamaya enjekte ederek hile veya modları çalıştırmanızı sağlar. Genellikle internal cheatler için gereklidir.
     </span>
     <a href="https://www.mediafire.com/file/jzku50guv9ig4jq/Extreme+Injector+v3.rar/file" target="_blank">İndir</a>
-    <p>DLL dosyalarını oyun veya uygulamaya enjekte ederek hile veya modları çalıştırmanızı sağlar. Genellikle internal cheatler için gereklidir.</p>
   </div>
 
   <div class="item">
     <span>
-      SAHO CHEATS ORIGINAL OPTIMIZER <br>
-      <small>External/Internal destek</small>
+      <b>SAHO CHEATS ORIGINAL OPTIMIZER</b><br>
+      External/Internal destek<br>
+      SAHO panelini optimize eder, FPS düşüşlerini önler ve sistem kaynaklarını dengeler. Internal ve External panellerle uyumludur.
     </span>
     <a href="https://www.mediafire.com/file/dxqo57zmsidu4x5/saho_optimizer.exe/file" target="_blank">İndir</a>
-    <p>SAHO panelini optimize eder, FPS düşüşlerini önler ve sistem kaynaklarını dengeler. Internal ve External panellerle uyumludur.</p>
   </div>
 
-  <!-- DOSYA & SİSTEM ARAÇLARI -->
+  <!-- Sistem ve Dosya Araçları -->
   <h3>Sistem ve Dosya Araçları</h3>
   <div class="item">
     <span>
-      WinRAR x64 <br>
-      <small>64 Bit Windows sistemler için</small>
+      <b>WinRAR x64</b><br>
+      64 Bit Windows sistemler için<br>
+      RAR ve ZIP dosyalarını açar ve arşivleme işlemleri yapar. Tüm Windows sistemleriyle uyumludur.
     </span>
     <a href="https://www.mediafire.com/file/6z050qr2p4ryxfu/winrar-x64-713.exe/file" target="_blank">İndir</a>
-    <p>RAR ve ZIP dosyalarını açar ve arşivleme işlemleri yapar. Tüm Windows sistemleriyle uyumludur.</p>
   </div>
 </div>
-
-    
-  
 
   </div>
 </div>
@@ -801,7 +813,7 @@ function startParticles(){
 }
 </script>
 <audio id="loginMusic"
-       src="https://raw.githubusercontent.com/Berkay311111111/agapator-saho/main/1.mp3"
+       src="https://raw.githubusercontent.com/Berkay311111111/agapator-saho/main/33.mp3"
        preload="auto"></audio>
 
 </body>
